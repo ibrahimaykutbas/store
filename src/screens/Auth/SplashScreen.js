@@ -1,4 +1,4 @@
-import { SafeAreaView, Text, StyleSheet } from 'react-native';
+import { SafeAreaView, StyleSheet } from 'react-native';
 import React, { useEffect } from 'react';
 
 import Colors from '../../theme/Colors';
@@ -8,10 +8,18 @@ import Logo from '../../assets/svgs/logo.svg';
 
 import routes from '../../navigation/routes';
 
+import { useSelector } from 'react-redux';
+
 const SplashScreen = ({ navigation }) => {
+  const { isLogged, token } = useSelector(state => state.user);
+
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate(routes.LOGIN);
+      if (isLogged && token) {
+        navigation.navigate(routes.TAB_NAVIGATOR);
+      } else {
+        navigation.navigate(routes.LOGIN);
+      }
     }, 2000);
   }, []);
 

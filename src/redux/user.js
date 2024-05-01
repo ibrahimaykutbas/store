@@ -4,30 +4,33 @@ import { MMKV } from 'react-native-mmkv';
 
 const storage = new MMKV();
 
-const name = storage.getString('name');
-
-const favorites = storage.getString('favorites');
-const favoritesParse = favorites && JSON.parse(favorites);
+const username = storage.getString('username');
+const token = storage.getString('token');
+const isLogged = storage.getBoolean('isLogged');
 
 const initialState = {
-  name: name || '',
-  isLogged: false,
-
-  favorites: favoritesParse || [],
+  username: username || '',
+  token: token || '',
+  isLogged: isLogged || false,
 };
 
 const user = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    // İsim Değiştirme
-    changeName: (state, action) => {
-      state.name = action.payload;
-      storage.set('name', state.name);
+    // Giriş işlemi başarılı olduğunda tetiklenir.
+    login: (state, action) => {
+      state.username = action.payload.username;
+      state.token = action.payload.token;
+      state.isLogged = true;
+
+      storage.set('username', action.payload.username);
+      storage.set('token', action.payload.token);
+      storage.set('isLogged', true);
     },
   },
 });
 
-export const { changeName } = user.actions;
+export const { login } = user.actions;
 
 export default user.reducer;

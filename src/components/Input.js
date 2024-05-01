@@ -5,7 +5,7 @@ import Colors from '../theme/Colors';
 import { getRW, getRH } from '../theme/Units';
 import Fonts from '../theme/Fonts';
 
-const Input = ({ value, onChangeText, placeholder }) => {
+const Input = ({ value, onChangeText, placeholder, isSecure }) => {
   return (
     <TextInput
       style={styles.container}
@@ -13,6 +13,8 @@ const Input = ({ value, onChangeText, placeholder }) => {
       onChangeText={onChangeText}
       placeholder={placeholder}
       placeholderTextColor={Colors.DARK_GREY}
+      secureTextEntry={isSecure}
+      autoCapitalize='none'
     />
   );
 };

@@ -6,6 +6,8 @@ import TabNavigator from './TabNavigator';
 
 import routes from './routes';
 
+import FlashMessage from 'react-native-flash-message';
+
 const Stack = createNativeStackNavigator();
 
 const RootNavigator = () => {
@@ -21,8 +23,9 @@ const RootNavigator = () => {
           headerShown: false,
         }}>
         <Stack.Screen name={routes.AUTH_NAVIGATOR} component={AuthNavigator} />
-        {/* <Stack.Screen name={routes.TAB_NAVIGATOR} component={TabNavigator} /> */}
+        <Stack.Screen name={routes.TAB_NAVIGATOR} component={TabNavigator} />
       </Stack.Navigator>
+      <FlashMessage position="top" />
     </NavigationContainer>
   );
 };
