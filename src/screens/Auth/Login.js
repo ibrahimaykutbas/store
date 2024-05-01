@@ -37,14 +37,11 @@ const Login = ({ navigation }) => {
           placeholder="Password"
         />
 
-        <Button
-          title="Sign in"
-          onPress={() => navigation.navigate(routes.REGISTER)}
-        />
+        <Button title="Sign in" onPress={() => {}} />
 
         <TouchableOpacity
           style={styles.subButton}
-          onPress={() => {}}
+          onPress={() => navigation.navigate(routes.REGISTER)}
           activeOpacity={0.8}>
           <Text style={styles.subButtonTitle}>
             Dont have an Account ?
@@ -54,7 +51,7 @@ const Login = ({ navigation }) => {
 
         <TouchableOpacity
           style={styles.subButton}
-          onPress={() => {}}
+          onPress={() => navigation.navigate(routes.FORGOT_PASSWORD)}
           activeOpacity={0.8}>
           <Text style={styles.subButtonTitle}>
             Forgot Password ?<Text style={{ fontWeight: '700' }}> Reset</Text>
