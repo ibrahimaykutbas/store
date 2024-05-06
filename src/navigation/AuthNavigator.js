@@ -7,6 +7,7 @@ import SplashScreen from '../screens/Auth/SplashScreen';
 import Login from '../screens/Auth/Login';
 import Register from '../screens/Auth/Register';
 import ForgotPassword from '../screens/Auth/ForgotPassword';
+import EmailSend from '../screens/Auth/EmailSend';
 
 import routes from './routes';
 
@@ -22,6 +23,7 @@ const AuthNavigator = () => {
       <Stack.Screen name={routes.LOGIN} component={Login} />
       <Stack.Screen name={routes.REGISTER} component={Register} />
       <Stack.Screen name={routes.FORGOT_PASSWORD} component={ForgotPassword} />
+      <Stack.Screen name={routes.EMAIl_SEND} component={EmailSend} />
     </Stack.Navigator>
   );
 };

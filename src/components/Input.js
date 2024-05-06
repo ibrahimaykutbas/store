@@ -1,9 +1,8 @@
-import { TextInput, View, Text, StyleSheet } from 'react-native';
+import { TextInput, StyleSheet } from 'react-native';
 import React from 'react';
 
 import Colors from '../theme/Colors';
 import { getRW, getRH } from '../theme/Units';
-import Fonts from '../theme/Fonts';
 
 const Input = ({ value, onChangeText, placeholder, isSecure }) => {
   return (
@@ -14,7 +13,7 @@ const Input = ({ value, onChangeText, placeholder, isSecure }) => {
       placeholder={placeholder}
       placeholderTextColor={Colors.DARK_GREY}
       secureTextEntry={isSecure}
-      autoCapitalize='none'
+      autoCapitalize="none"
     />
   );
 };
