@@ -18,11 +18,46 @@ import Button from '../../components/Button';
 
 import BackIcon from '../../assets/svgs/BackIcon.svg';
 
+import { showMessage } from 'react-native-flash-message';
+
+import useApi from '../../hooks/useApi';
+import authApi from '../../services/auth';
+
 const Register = ({ navigation }) => {
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const registerApi = useApi(authApi.register);
+
+  const onPressRegister = async () => {
+    try {
+      const response = await registerApi.request(
+        firstname,
+        lastname,
+        email,
+        username,
+        password,
+      );
+
+      if (response.status !== 200) {
+        showMessage({
+          message: 'Unexpected Error',
+          type: 'danger',
+        });
+      } else {
+        showMessage({
+          message: 'Successfully Created User',
+          type: 'success',
+        });
+        navigation.navigate(routes.TAB_NAVIGATOR);
+      }
+    } catch (error) {
+      console.log('onPressRegister Error: ', error);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -45,6 +80,11 @@ const Register = ({ navigation }) => {
           placeholder="Lastname"
         />
         <Input
+          value={username}
+          onChangeText={setUsername}
+          placeholder="Username"
+        />
+        <Input
           value={email}
           onChangeText={setEmail}
           placeholder="Email Address"
@@ -57,11 +97,12 @@ const Register = ({ navigation }) => {
         />
 
         <Button
-          title="Contine"
+          title="Register"
           disabled={
             firstname == '' || lastname == '' || password == '' || email == ''
           }
-          onPress={() => navigation.navigate(routes.LOGIN)}
+          onPress={() => onPressRegister()}
+          loading={registerApi.loading}
         />
 
         <TouchableOpacity
