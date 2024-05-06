@@ -13,6 +13,7 @@ export const routes = {
   NOTIFICATION: 'Notification',
   ORDERS: 'Orders',
   PROFILE: 'Profile',
+  EMAIl_SEND:'EmailSend'
 };
 
 export default routes;
