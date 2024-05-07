@@ -1,5 +1,11 @@
-import { SafeAreaView, View, Text, StyleSheet, ScrollView } from 'react-native';
-import React from 'react';
+import {
+  SafeAreaView,
+  Text,
+  StyleSheet,
+  ScrollView,
+  LogBox,
+} from 'react-native';
+import React, { useEffect } from 'react';
 
 import Colors from '../../theme/Colors';
 import { getRW, getRH } from '../../theme/Units';
@@ -15,16 +21,37 @@ import ProductList from '../../components/ProductList';
 import useApi from '../../hooks/useApi';
 import productApi from '../../services/products';
 
-const Home = ({ navigation }) => {
+const Home = () => {
   const getProductsApi = useApi(productApi.getProducts);
+
+  const getProducts = async () => {
+    try {
+      const result = await getProductsApi.request();
+      console.log(result.data[(0, 4)]);
+    } catch (error) {
+      console.log('getProducts Error: ', error);
+    }
+  };
+
+  useEffect(() => {
+    getProducts();
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested']); // Scrollview içerisinde FlatList kullanıldığında oluşan hatayı engellemek için.
+  }, []);
+
+  if (getProductsApi.loading) return <Text>Loading...</Text>;
 
   return (
     <SafeAreaView style={styles.container}>
       <Header isHome onPressBasket={() => console.log('Basket')} />
       <SearchBar />
-      <ScrollView style={styles.content}>
+      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         <Categories />
-        <ProductList title="Top Selling" />
+        <ProductList
+          title="Top Selling"
+          data={getProductsApi?.data.slice(0, 4)}
+        />
+
+        <ProductList title="New In" data={getProductsApi?.data.slice(-4)} />
       </ScrollView>
     </SafeAreaView>
   );
