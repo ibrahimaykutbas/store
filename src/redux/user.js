@@ -11,7 +11,7 @@ const isLogged = storage.getBoolean('isLogged');
 const initialState = {
   username: username || '',
   token: token || '',
-  isLogged: false,
+  isLogged: isLogged || false,
 };
 
 const user = createSlice({
