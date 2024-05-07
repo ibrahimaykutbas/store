@@ -16,7 +16,7 @@ import routes from '../../navigation/routes';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-import BackIcon from '../../assets/svgs/BackIcon.svg';
+import BackIcon from '../../assets/svgs/back.svg';
 
 const ForgotPassword = ({ navigation }) => {
   const [email, setEmail] = useState('');
