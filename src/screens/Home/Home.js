@@ -8,15 +8,23 @@ import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
 
 import routes from '../../navigation/routes';
+
 import Categories from '../../components/Categories';
+import ProductList from '../../components/ProductList';
+
+import useApi from '../../hooks/useApi';
+import productApi from '../../services/products';
 
 const Home = ({ navigation }) => {
+  const getProductsApi = useApi(productApi.getProducts);
+
   return (
     <SafeAreaView style={styles.container}>
       <Header isHome onPressBasket={() => console.log('Basket')} />
       <SearchBar />
       <ScrollView style={styles.content}>
-       <Categories/>
+        <Categories />
+        <ProductList title="Top Selling" />
       </ScrollView>
     </SafeAreaView>
   );
