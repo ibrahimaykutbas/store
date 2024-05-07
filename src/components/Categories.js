@@ -13,7 +13,13 @@ import Colors from '../theme/Colors';
 import { getRH, getRW } from '../theme/Units';
 import Fonts from '../theme/Fonts';
 
+import { useNavigation } from '@react-navigation/native';
+
+import routes from '../navigation/routes';
+
 const Categories = ({ data }) => {
+  const navigation = useNavigation();
+
   const images = {
     electronics: require('../assets/images/electronics.jpg'),
     jewelery: require('../assets/images/jelewery.jpg'),
@@ -34,7 +40,13 @@ const Categories = ({ data }) => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.categoriesText}>Categories</Text>
-        <TouchableOpacity onPress={() => console.log('Category page')}>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate(routes.OTHER_NAVIGATOR, {
+              screen: routes.CATEGORIES,
+              params: { data, images },
+            })
+          }>
           <Text style={styles.seeAllText}>See All</Text>
         </TouchableOpacity>
       </View>

@@ -4,8 +4,6 @@ import {
   StyleSheet,
   TouchableOpacity,
   FlatList,
-  Image,
-  Pressable,
 } from 'react-native';
 import React from 'react';
 
@@ -13,41 +11,9 @@ import Colors from '../theme/Colors';
 import { getRW, getRH } from '../theme/Units';
 import Fonts from '../theme/Fonts';
 
-import FavoriteIcon from '../assets/svgs/heart.svg';
+import Product from './Product';
 
-const ProductList = ({ title, data }) => {
-  // FlatList
-  const RenderProduct = ({ item }) => {
-    return (
-      <Pressable style={styles.product} key={item?.id.toString()}>
-        <Image
-          source={{
-            uri: item?.image,
-          }}
-          style={styles.image}
-          resizeMode="cover"
-        />
-
-        <Text style={styles.text} numberOfLines={2}>
-          {item?.title}
-        </Text>
-        <Text
-          style={{
-            ...styles.text,
-            fontWeight: '700',
-            fontSize: Fonts.size(14),
-          }}>
-          ${item?.price}
-        </Text>
-
-        <View style={styles.favoriteIcon}>
-          <FavoriteIcon width={getRW(25)} height={getRH(25)} />
-          {/*  Ürün favori ise fill değeri black olacak */}
-        </View>
-      </Pressable>
-    );
-  };
-
+const ProductList = ({ title, data, onPressSeeAll }) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -58,7 +24,7 @@ const ProductList = ({ title, data }) => {
           }}>
           {title}
         </Text>
-        <TouchableOpacity onPress={() => console.log('See All')}>
+        <TouchableOpacity onPress={onPressSeeAll}>
           <Text
             style={{
               ...styles.title,
@@ -71,7 +37,7 @@ const ProductList = ({ title, data }) => {
 
       <FlatList
         data={data}
-        renderItem={RenderProduct}
+        renderItem={Product}
         horizontal
         showsHorizontalScrollIndicator={false}
       />
