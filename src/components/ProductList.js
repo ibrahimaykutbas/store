@@ -28,7 +28,9 @@ const ProductList = ({ title, data }) => {
           resizeMode="cover"
         />
 
-        <Text style={styles.text}>{item?.title}</Text>
+        <Text style={styles.text} numberOfLines={2}>
+          {item?.title}
+        </Text>
         <Text
           style={{
             ...styles.text,
@@ -116,6 +118,6 @@ const styles = StyleSheet.create({
     fontSize: Fonts.size(12),
     fontWeight: '400',
     marginTop: getRH(8),
-    marginHorizontal: getRW(4),
+    marginHorizontal: getRW(8),
   },
 });
