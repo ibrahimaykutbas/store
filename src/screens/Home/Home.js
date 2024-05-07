@@ -27,39 +27,35 @@ const Home = () => {
 
   const getCategories = async () => {
     try {
-      const result = await getCategoriesApi.request();
+      await getCategoriesApi.request();
     } catch (error) {
       console.log('getCategories Error: ', error);
     }
   };
-  useEffect(() => {
-    getCategories();
-    LogBox.ignoreLogs(['VirtualizedLists should never be nested'])
-  }, []);
-  
 
   const getProducts = async () => {
     try {
-      const result = await getProductsApi.request();
-      console.log(result.data[(0, 4)]);
+      await getProductsApi.request();
     } catch (error) {
       console.log('getProducts Error: ', error);
     }
   };
 
   useEffect(() => {
+    getCategories();
     getProducts();
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']); // Scrollview içerisinde FlatList kullanıldığında oluşan hatayı engellemek için.
   }, []);
 
-  if (getProductsApi.loading) return <Text>Loading...</Text>;
+  if (getProductsApi.loading || getCategoriesApi.loading)
+    return <Text>Loading...</Text>;
 
   return (
     <SafeAreaView style={styles.container}>
       <Header isHome onPressBasket={() => console.log('Basket')} />
       <SearchBar />
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        <Categories />
+        <Categories data={getCategoriesApi.data} />
         <ProductList
           title="Top Selling"
           data={getProductsApi?.data.slice(0, 4)}
