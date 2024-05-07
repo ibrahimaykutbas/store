@@ -32,9 +32,9 @@ const Categories = ({ data }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.Header}>
+      <View style={styles.header}>
         <Text style={styles.categoriesText}>Categories</Text>
-        <TouchableOpacity onPress={()=>console.log('Category page')}>
+        <TouchableOpacity onPress={() => console.log('Category page')}>
           <Text style={styles.seeAllText}>See All</Text>
         </TouchableOpacity>
       </View>
@@ -51,10 +51,11 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.WHITE,
     marginTop: getRH(25),
   },
-  Header: {
+  header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginBottom: getRH(16),
   },
   categoriesText: {
     fontSize: Fonts.size(17),
