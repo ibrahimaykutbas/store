@@ -1,5 +1,5 @@
-import { SafeAreaView, View, Text, StyleSheet, ScrollView } from 'react-native';
-import React from 'react';
+import { SafeAreaView, View, Text, StyleSheet, ScrollView, LogBox } from 'react-native';
+import React, { useEffect } from 'react';
 
 import Colors from '../../theme/Colors';
 import { getRW, getRH } from '../../theme/Units';
@@ -17,14 +17,29 @@ import productApi from '../../services/products';
 
 const Home = ({ navigation }) => {
   const getProductsApi = useApi(productApi.getProducts);
+  const getCategoriesApi = useApi(productApi.getCategories);
+
+  const getCategories = async () => {
+    try {
+      const result = await getCategoriesApi.request();
+    } catch (error) {
+      console.log('getCategories Error: ', error);
+    }
+  };
+  useEffect(() => {
+    getCategories();
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested'])
+  }, []);
+  
 
   return (
     <SafeAreaView style={styles.container}>
       <Header isHome onPressBasket={() => console.log('Basket')} />
       <SearchBar />
       <ScrollView style={styles.content}>
-        <Categories />
+      <Categories />
         <ProductList title="Top Selling" />
+        <Categories  data={getCategoriesApi.data}/>
       </ScrollView>
     </SafeAreaView>
   );
