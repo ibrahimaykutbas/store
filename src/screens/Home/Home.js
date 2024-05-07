@@ -23,6 +23,20 @@ import productApi from '../../services/products';
 
 const Home = () => {
   const getProductsApi = useApi(productApi.getProducts);
+  const getCategoriesApi = useApi(productApi.getCategories);
+
+  const getCategories = async () => {
+    try {
+      const result = await getCategoriesApi.request();
+    } catch (error) {
+      console.log('getCategories Error: ', error);
+    }
+  };
+  useEffect(() => {
+    getCategories();
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested'])
+  }, []);
+  
 
   const getProducts = async () => {
     try {
