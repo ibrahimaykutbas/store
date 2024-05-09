@@ -24,7 +24,7 @@ import { useNavigation } from '@react-navigation/native';
 const OrderCard = ({ title, order = false }) => {
   const navigation = useNavigation();
 
-  const [selectedSection, setSelectedSection] = useState(false);
+  const [selectedSection, setSelectedSection] = useState('Procressing');
 
   const onPressGoCategories = () => {
     navigation.navigate(routes.OTHER_NAVIGATOR, {
