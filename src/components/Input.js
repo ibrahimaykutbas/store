@@ -28,7 +28,7 @@ const Input = ({
           value={value}
           onChangeText={onChangeText}
           placeholder={placeholder}
-          placeholderTextColor={Colors.DARK_GREY}
+          placeholderTextColor={Colors.BLACK}
           secureTextEntry={isSecure}
           autoCapitalize="none"
         />

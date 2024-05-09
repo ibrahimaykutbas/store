@@ -8,11 +8,19 @@ import Fonts from '../theme/Fonts';
 import UserIcon from '../assets/svgs/user';
 import BackIcon from '../assets/svgs/back';
 import BasketIcon from '../assets/svgs/basket';
+import FavoriteIcon from '../assets/svgs/heart';
 
 import { useNavigation } from '@react-navigation/native';
 import routes from '../navigation/routes';
 
-const Header = ({ isHome = false, onPressBack, onPressBasket }) => {
+const Header = ({
+  isHome = false,
+  onPressBack,
+  onPressBasket,
+  onPressFavorite,
+  isFavorite,
+  title,
+}) => {
   const navigation = useNavigation();
 
   return (
@@ -40,14 +48,21 @@ const Header = ({ isHome = false, onPressBack, onPressBasket }) => {
       ) : (
         <>
           {onPressBack && (
-            <TouchableOpacity style={styles.backButton}>
+            <TouchableOpacity style={styles.backButton} onPress={onPressBack}>
               <BackIcon width={getRW(8)} height={getRH(22)} />
             </TouchableOpacity>
           )}
-          <Text style={styles.title}>Header</Text>
-          {onPressBasket && (
-            <TouchableOpacity style={styles.backButton}>
-              <BackIcon width={getRW(8)} height={getRH(22)} />
+          <Text style={styles.title}>{title}</Text>
+          {onPressFavorite && (
+            <TouchableOpacity
+              style={styles.backButton}
+              onPress={onPressFavorite}>
+              <FavoriteIcon
+                width={getRW(25)}
+                height={getRH(25)}
+                fill={isFavorite ? Colors.PURPLE : 'none'}
+                stroke={Colors.PURPLE}
+              />
             </TouchableOpacity>
           )}
         </>
