@@ -1,12 +1,24 @@
-import { View, Text } from 'react-native';
-import React from 'react';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+
+import Colors from '../../theme/Colors'
+
+import NotificationsCard from '../../components/NotificationsCard'
 
 const Notifications = () => {
   return (
-    <View>
-      <Text>Notifications</Text>
-    </View>
-  );
-};
+    <SafeAreaView style={styles.container}>
+      <NotificationsCard title='Notifications'/>
+    </SafeAreaView>
+  )
+}
 
-export default Notifications;
+export default Notifications
+
+const styles = StyleSheet.create({
+  container:{
+    flex:1,
+    backgroundColor:Colors.WHITE
+}
+
+})
