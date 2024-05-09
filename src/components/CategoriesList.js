@@ -17,12 +17,12 @@ import { useNavigation } from '@react-navigation/native';
 
 import routes from '../navigation/routes';
 
-const Categories = ({ data }) => {
+const CategoriesList = ({ data }) => {
   const navigation = useNavigation();
 
   const images = {
-    electronics: require('../assets/images/electronics.jpg'),
-    jewelery: require('../assets/images/jelewery.jpg'),
+    'electronics': require('../assets/images/electronics.jpg'),
+    'jewelery': require('../assets/images/jelewery.jpg'),
     "men's clothing": require('../assets/images/menClothing.jpg'),
     "women's clothing": require('../assets/images/womenClothing.jpg'),
   };
@@ -44,7 +44,7 @@ const Categories = ({ data }) => {
           onPress={() =>
             navigation.navigate(routes.OTHER_NAVIGATOR, {
               screen: routes.CATEGORIES,
-              params: { data, images },
+              /* params: { data, images }, */
             })
           }>
           <Text style={styles.seeAllText}>See All</Text>
@@ -55,7 +55,7 @@ const Categories = ({ data }) => {
   );
 };
 
-export default Categories;
+export default CategoriesList;
 
 const styles = StyleSheet.create({
   container: {

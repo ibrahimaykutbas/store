@@ -15,7 +15,7 @@ import SearchBar from '../../components/SearchBar';
 
 import routes from '../../navigation/routes';
 
-import Categories from '../../components/Categories';
+import CategoriesList from '../../components/CategoriesList';
 import ProductList from '../../components/ProductList';
 import Loader from '../../components/Loader';
 
@@ -54,7 +54,7 @@ const Home = ({ navigation }) => {
       <Header isHome onPressBasket={() => console.log('Basket')} />
       <SearchBar />
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        <Categories data={getCategoriesApi.data} />
+        <CategoriesList data={getCategoriesApi.data} />
         <ProductList
           title="Top Selling"
           data={getProductsApi?.data.slice(0, 4)}
