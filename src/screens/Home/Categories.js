@@ -7,7 +7,7 @@ import {
   FlatList,
   Image,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { getRW, getRH } from '../../theme/Units';
 import Colors from '../../theme/Colors';
@@ -18,11 +18,31 @@ import BackIcon from '../../assets/svgs/back';
 import { useNavigation } from '@react-navigation/native';
 
 import routes from '../../navigation/routes';
+import productsApi from '../../services/products';
 
 const Categories = ({ route }) => {
+  const getCategoriesApi = useApi(productsApi.getCategories);
+
   const navigation = useNavigation();
 
-  const { data, images } = route.params;
+  const getCategories = async () => {
+    try {
+      await getCategoriesApi.request();
+    } catch (error) {
+      console.log('getCategories Error: ', error);
+    }
+  };
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
+  const images = {
+    electronics: require('../../assets/images/electronics.jpg'),
+    jewelery: require('../../assets/images/jelewery.jpg'),
+    "men's clothing": require('../../assets/images/menClothing.jpg'),
+    "women's clothing": require('../../assets/images/womenClothing.jpg'),
+  };
 
   const RenderCategories = ({ item }) => {
     return (
@@ -48,7 +68,7 @@ const Categories = ({ route }) => {
         <Text style={styles.title}>Shop by Categories</Text>
       </View>
 
-      <FlatList data={data} renderItem={RenderCategories} />
+      <FlatList data={getCategoriesApi.data} renderItem={RenderCategories} />
     </SafeAreaView>
   );
 };
