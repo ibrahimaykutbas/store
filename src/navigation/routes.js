@@ -5,6 +5,7 @@ export const routes = {
   HOME: 'Home',
   CATEGORIES: 'Categories',
   PRODUCTS: 'Products',
+  PRODUCT_DETAIL: 'ProductDetail',
   NOTIFICATION: 'Notification',
   ORDERS: 'Orders',
   PROFILE: 'Profile',
