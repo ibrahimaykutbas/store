@@ -1,5 +1,12 @@
-import { View, Text, StyleSheet, FlatList, ScrollView } from 'react-native';
-import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
+import React, { useState } from 'react';
 
 import Colors from '../theme/Colors';
 import { getRH, getRW } from '../theme/Units';
@@ -7,14 +14,17 @@ import Fonts from '../theme/Fonts';
 
 import BasketIcon from '../assets/svgs/checkOutIcon.svg';
 import OrderIcon from '../assets/svgs/orders.svg';
+import Arrow from '../assets/svgs/back.svg';
 
 import Button from './Button';
 
 import routes from '../navigation/routes';
 import { useNavigation } from '@react-navigation/native';
 
-const OrderCard = ({ title, notification = false }) => {
+const OrderCard = ({ title, order = false }) => {
   const navigation = useNavigation();
+
+  const [selectedSection, setSelectedSection] = useState(false);
 
   const onPressGoCategories = () => {
     navigation.navigate(routes.OTHER_NAVIGATOR, {
@@ -22,37 +32,53 @@ const OrderCard = ({ title, notification = false }) => {
     });
   };
 
+  const OrderTexts = [
+    {
+      orderNumber: '#456765',
+      itemNumber: '4',
+    },
+    {
+      orderNumber: '#454569',
+      itemNumber: '2',
+    },
+    {
+      orderNumber: '#454809',
+      itemNumber: '1',
+    },
+  ];
+
+  const onPressSelected = section => {
+    setSelectedSection(section);
+  };
+
+  const sections = [
+    'Procressing',
+    'Shipped',
+    'Delivered',
+    'Returned',
+    'Canceled',
+  ];
+
   const renderOrder = ({ item }) => {
     return (
-      <View style={styles.renderContainer}>
-        <ScrollView>
-          <View>
-            <Text>Procressing</Text>
-          </View>
-          <View>
-            <Text>Shipped</Text>
-          </View>
-          <View>
-            <Text>Delivered</Text>
-          </View>
-          <View>
-            <Text>Returned</Text>
-          </View>
-          <View>
-            <Text>Canceled</Text>
-          </View>
-        </ScrollView>
-
-
-
+      <TouchableOpacity style={styles.renderContainer}>
         <View style={styles.renderInnerContainer}>
           <OrderIcon width={getRW(30)} height={getRH(30)} />
-          <Text style={styles.renderContainerText}>
-            Gilbert, you placed and order check your order history for full
-            details
-          </Text>
+          <View style={{ flexDirection: 'column', marginRight: getRW(120) }}>
+            <Text numberOfLines={2} style={styles.renderContainerText}>
+              Order {item.orderNumber}
+            </Text>
+            <Text style={styles.renderContainerInnerText}>
+              {item.itemNumber} items
+            </Text>
+          </View>
+          <Arrow
+            width={getRW(22)}
+            height={getRH(22)}
+            style={{ transform: [{ rotateY: '180deg' }] }}
+          />
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 
@@ -61,7 +87,7 @@ const OrderCard = ({ title, notification = false }) => {
       <View style={styles.headerContainer}>
         <Text style={styles.headerText}>{title}</Text>
       </View>
-      {notification ? (
+      {order ? (
         <>
           <View style={styles.innerContainer}>
             <BasketIcon width={getRW(170)} height={getRH(170)} />
@@ -74,7 +100,41 @@ const OrderCard = ({ title, notification = false }) => {
           />
         </>
       ) : (
-        <FlatList data={title} renderItem={renderOrder} />
+        <View style={{ height: 300 }}>
+          <ScrollView
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            style={styles.orderProgres}>
+            {sections.map(item => {
+              const isSelected = selectedSection == item;
+              /* Acılısta secili gelen progres yok */
+
+              return (
+                <TouchableOpacity
+                  key={item}
+                  onPress={() => onPressSelected(item)}
+                  style={
+                    isSelected
+                      ? styles.selectedOrderInnerContainer
+                      : styles.orderInnerContainer
+                  }>
+                  <Text
+                    style={{
+                      ...styles.orderProgresText,
+                      color: isSelected ? Colors.WHITE : Colors.BLACK,
+                    }}>
+                    {item}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </ScrollView>
+          <FlatList
+            data={OrderTexts}
+            renderItem={renderOrder}
+            alwaysBounceVertical={false}
+          />
+        </View>
       )}
     </View>
   );
@@ -101,7 +161,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: getRH(204),
-
   },
   innerContainerText: {
     fontSize: Fonts.size(34),
@@ -123,8 +182,48 @@ const styles = StyleSheet.create({
   },
   renderInnerContainer: {
     flexDirection: 'row',
+    width: getRW(300),
+    marginLeft: getRH(20),
+    alignItems: 'center',
   },
   renderContainerText: {
-    marginLeft: 20,
+    marginLeft: getRW(20),
+    fontSize: Fonts.size(17),
+    fontWeight: 'bold',
+    color: Colors.BLACK,
+  },
+  renderContainerInnerText: {
+    marginLeft: getRW(20),
+    fontSize: Fonts.size(13),
+    fontWeight: 'bold',
+    color: Colors.BLACK,
+    opacity: 0.5,
+  },
+  orderProgres: {
+    marginHorizontal: getRW(27),
+    marginBottom: getRH(24),
+  },
+  orderInnerContainer: {
+    width: 'auto',
+    height: getRH(35),
+    marginHorizontal: getRH(5),
+    backgroundColor: Colors.GREY,
+    borderRadius: getRH(15),
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: getRH(5),
+  },
+  orderProgresText: {
+    fontSize: Fonts.size(14),
+    color: Colors.BLACK,
+  },
+  selectedOrderInnerContainer: {
+    height: getRH(35),
+    marginHorizontal: getRH(5),
+    backgroundColor: Colors.PURPLE,
+    borderRadius: getRH(15),
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: getRH(5),
   },
 });

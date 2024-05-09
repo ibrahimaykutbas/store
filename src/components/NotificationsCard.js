@@ -23,14 +23,36 @@ const NotificationsCard = ({ title, notification = false }) => {
     });
   };
 
+  const NotificationTexts = [
+    {
+      text: 'Gilbert, you placed and order check your order history for full details',
+      isRead: true,
+    },
+    {
+      text: 'Gilbert, Thank you for shopping with us we have canceled order #24568.',
+      isRead: false,
+    },
+    {
+      text: 'Gilbert, your Order #24568 has been  confirmed check  your order history for full details...',
+      isRead: false,
+    },
+  ];
+
   const renderNotification = ({ item }) => {
     return (
       <View style={styles.renderContainer}>
         <View style={styles.renderInnerContainer}>
+          {item.isRead ? (
+            <>
+              <View style={styles.renderImageContainer}>
+                <RedDot />
+              </View>
+            </>
+          ) : null}
           <NotificationIcon width={getRW(30)} height={getRH(30)} />
-          <Text style={styles.renderContainerText}>
-            Gilbert, you placed and order check your order history for full
-            details
+
+          <Text numberOfLines={2} style={styles.renderContainerText}>
+            {item.text}
           </Text>
         </View>
       </View>
@@ -55,7 +77,7 @@ const NotificationsCard = ({ title, notification = false }) => {
           />
         </>
       ) : (
-        <FlatList data={title} renderItem={renderNotification} />
+        <FlatList data={NotificationTexts} renderItem={renderNotification} />
       )}
     </View>
   );
@@ -82,7 +104,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: getRH(204),
-
   },
   innerContainerText: {
     fontSize: Fonts.size(34),
@@ -104,8 +125,15 @@ const styles = StyleSheet.create({
   },
   renderInnerContainer: {
     flexDirection: 'row',
+    width: getRW(300),
+    marginLeft: getRH(20),
   },
   renderContainerText: {
     marginLeft: 20,
+    fontSize: Fonts.size(13),
+  },
+  renderImageContainer: {
+    position: 'absolute',
+    left: 20,
   },
 });
