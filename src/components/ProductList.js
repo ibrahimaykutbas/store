@@ -37,7 +37,7 @@ const ProductList = ({ title, data, onPressSeeAll }) => {
 
       <FlatList
         data={data}
-        renderItem={Product}
+        renderItem={({ item }) => <Product item={item} />}
         horizontal
         showsHorizontalScrollIndicator={false}
       />
