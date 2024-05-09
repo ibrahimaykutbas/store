@@ -8,10 +8,18 @@ const username = storage.getString('username');
 const token = storage.getString('token');
 const isLogged = storage.getBoolean('isLogged');
 
+const favoriteListStorage = storage.getString('favoriteList');
+const favoriteList = favoriteListStorage && JSON.parse(favoriteListStorage);
+
+const basketStorage = storage.getString('basket');
+const basket = basketStorage && JSON.parse(basketStorage);
+
 const initialState = {
   username: username || '',
   token: token || '',
   isLogged: isLogged || false,
+  favoriteList: favoriteList || [],
+  basket: basket || [],
 };
 
 const user = createSlice({
@@ -28,9 +36,41 @@ const user = createSlice({
       storage.set('token', action.payload.token);
       storage.set('isLogged', true);
     },
+    changeFavoriteList: (state, action) => {
+      const product = action.payload;
+      const isFavorite = state.favoriteList.find(
+        item => item.id === product.id,
+      );
+
+      if (isFavorite) {
+        state.favoriteList = state.favoriteList.filter(
+          item => item.id !== product.id,
+        );
+      } else {
+        state.favoriteList.push(product);
+      }
+
+      return storage.set('favoriteList', JSON.stringify(state.favoriteList));
+    },
+    addToBasket: (state, action) => {
+      const product = action.payload;
+      const isExist = state.basket.find(item => item.id === product.id);
+      if (isExist) {
+        state.basket = state.basket.map(item =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item,
+        );
+      } else {
+        state.basket.push({ ...product, quantity: 1 });
+      }
+
+      return storage.set('basket', JSON.stringify(state.basket));
+    },
+    // Sepetten ürünü çıkartma veya azaltma işlemi eklenecek.
   },
 });
 
-export const { login } = user.actions;
+export const { login, changeFavoriteList, addToBasket } = user.actions;
 
 export default user.reducer;

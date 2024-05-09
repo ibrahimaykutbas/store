@@ -7,20 +7,39 @@ import Fonts from '../theme/Fonts';
 
 import FavoriteIcon from '../assets/svgs/heart.svg';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { changeFavoriteList } from '../redux/user';
+
+import { useNavigation } from '@react-navigation/native';
+
+import routes from '../navigation/routes';
+
 const Product = ({ item, propStyle }) => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  const favoriteList = useSelector(state => state.user.favoriteList);
+  const isFavorite = favoriteList.find(p => p.id === item?.id);
+
   return (
     <Pressable
       style={{
         ...styles.product,
         ...propStyle,
       }}
-      key={item?.id.toString()}>
+      key={item?.id.toString()}
+      onPress={() =>
+        navigation.navigate(routes.OTHER_NAVIGATOR, {
+          screen: routes.PRODUCT_DETAIL,
+          params: { product: item },
+        })
+      }>
       <Image
         source={{
           uri: item?.image,
         }}
         style={styles.image}
-        resizeMode="contain"
+        resizeMode="cover"
       />
 
       <Text style={styles.text} numberOfLines={2}>
@@ -35,10 +54,16 @@ const Product = ({ item, propStyle }) => {
         ${item?.price}
       </Text>
 
-      <View style={styles.favoriteIcon}>
-        <FavoriteIcon width={getRW(25)} height={getRH(25)} />
-        {/*  Ürün favori ise fill değeri black olacak */}
-      </View>
+      <Pressable
+        style={styles.favoriteIcon}
+        onPress={() => dispatch(changeFavoriteList(item))}>
+        <FavoriteIcon
+          width={getRW(25)}
+          height={getRH(25)}
+          fill={isFavorite ? Colors.PURPLE : 'none'}
+          stroke={Colors.PURPLE}
+        />
+      </Pressable>
     </Pressable>
   );
 };
