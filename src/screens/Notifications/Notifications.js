@@ -14,7 +14,7 @@ import Button from '../../components/Button';
 import routes from '../../navigation/routes';
 import { useNavigation } from '@react-navigation/native';
 
-const Notifications = ({notification = true}) => {
+const Notifications = ({notification = false}) => {
   const navigation = useNavigation();
 
   const onPressNotifications = () => {
@@ -77,7 +77,7 @@ const Notifications = ({notification = true}) => {
           />
         </>
       ) : (
-        <FlatList data={NotificationTexts} renderItem={renderNotification} />
+        <FlatList scrollEnabled={false} data={NotificationTexts} renderItem={renderNotification} />
       )}
     </View>
   );
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.WHITE,
   },
   headerContainer: {
-    marginTop: getRH(51),
+    marginTop: getRH(90),
     marginBottom: getRH(40),
     justifyContent: 'center',
     alignItems: 'center',

@@ -8,6 +8,7 @@ export const routes = {
   PRODUCT_DETAIL: 'ProductDetail',
   NOTIFICATION: 'Notification',
   ORDERS: 'Orders',
+  ORDER_DETAIL:'OrderDetail',
   PROFILE: 'Profile',
   SPLASH_SCREEN: 'SplashScreen',
   LOGIN: 'Login',
@@ -15,7 +16,6 @@ export const routes = {
   FORGOT_PASSWORD: 'ForgotPassword',
   HOME: 'Home',
   NOTIFICATION: 'Notification',
-  ORDERS: 'Orders',
   PROFILE: 'Profile',
   EMAIl_SEND: 'EmailSend',
 };

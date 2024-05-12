@@ -21,7 +21,7 @@ import Button from '../../components/Button';
 import routes from '../../navigation/routes';
 import { useNavigation } from '@react-navigation/native';
 
-const Orders = ({order = false}) => {
+const Orders = ({ order = false }) => {
   const navigation = useNavigation();
 
   const [selectedSection, setSelectedSection] = useState('Procressing');
@@ -29,6 +29,15 @@ const Orders = ({order = false}) => {
   const onPressGoCategories = () => {
     navigation.navigate(routes.OTHER_NAVIGATOR, {
       screen: routes.CATEGORIES,
+    });
+  };
+
+  const onPressGoOrderDetail = orderText => {
+    navigation.navigate(routes.OTHER_NAVIGATOR, {
+      screen: routes.ORDER_DETAIL,
+      params: {
+        orderText: orderText,
+      },
     });
   };
 
@@ -61,9 +70,12 @@ const Orders = ({order = false}) => {
 
   const renderOrder = ({ item }) => {
     return (
-      <TouchableOpacity style={styles.renderContainer}>
+      <TouchableOpacity
+        onPress={() => onPressGoOrderDetail(item)}
+        style={styles.renderContainer}>
         <View style={styles.renderInnerContainer}>
           <OrderIcon width={getRW(30)} height={getRH(30)} />
+          {/* order ıcon daha koyu olmalı */}
           <View style={{ flexDirection: 'column', marginRight: getRW(120) }}>
             <Text numberOfLines={2} style={styles.renderContainerText}>
               Order {item.orderNumber}
@@ -147,7 +159,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.WHITE,
   },
   headerContainer: {
-    marginTop: getRH(51),
+    marginTop: getRH(90),
     marginBottom: getRH(40),
     justifyContent: 'center',
     alignItems: 'center',

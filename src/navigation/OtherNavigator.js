@@ -1,4 +1,3 @@
-import { View, Text } from 'react-native';
 import React from 'react';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -6,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Categories from '../screens/Home/Categories';
 import Products from '../screens/Home/Products';
 import ProductDetail from '../screens/Home/ProductDetail';
+import OrderDetail from '../screens/Orders/OrderDetail';
 
 import routes from './routes';
 
@@ -20,6 +20,7 @@ const AuthNavigator = () => {
       <Stack.Screen name={routes.CATEGORIES} component={Categories} />
       <Stack.Screen name={routes.PRODUCTS} component={Products} />
       <Stack.Screen name={routes.PRODUCT_DETAIL} component={ProductDetail} />
+      <Stack.Screen name={routes.ORDER_DETAIL} component={OrderDetail} />
     </Stack.Navigator>
   );
 };
