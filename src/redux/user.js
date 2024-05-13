@@ -32,9 +32,9 @@ const user = createSlice({
       state.token = action.payload.token;
       state.isLogged = true;
 
-      storage.set('username', action.payload.username);
-      storage.set('token', action.payload.token);
-      storage.set('isLogged', true);
+      storage.set('username', state.username);
+      storage.set('token', state.token);
+      storage.set('isLogged', state.isLogged);
     },
     changeFavoriteList: (state, action) => {
       const product = action.payload;
@@ -67,10 +67,36 @@ const user = createSlice({
 
       return storage.set('basket', JSON.stringify(state.basket));
     },
+    removeFromBasket: (state, action) => {
+      const product = action.payload;
+      const isExist = state.basket.find(item => item.id === product.id);
+      if (isExist && isExist.quantity > 1) {
+        state.basket = state.basket.map(item =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity - 1 }
+            : item,
+        );
+      } else {
+        const newBasket = state.basket.filter(item => item.id !== product.id);
+        state.basket = newBasket;
+      }
+
+      return storage.set('basket', JSON.stringify(state.basket));
+    },
+    clearBasket: state => {
+      state.basket = [];
+      return storage.set('basket', JSON.stringify(state.basket));
+    },
     // Sepetten ürünü çıkartma veya azaltma işlemi eklenecek.
   },
 });
 
-export const { login, changeFavoriteList, addToBasket } = user.actions;
+export const {
+  login,
+  changeFavoriteList,
+  addToBasket,
+  removeFromBasket,
+  clearBasket,
+} = user.actions;
 
 export default user.reducer;
