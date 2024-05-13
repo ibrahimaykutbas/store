@@ -5,7 +5,6 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
-  Pressable,
 } from 'react-native';
 import React from 'react';
 
@@ -21,18 +20,25 @@ const CategoriesList = ({ data }) => {
   const navigation = useNavigation();
 
   const images = {
-    'electronics': require('../assets/images/electronics.jpg'),
-    'jewelery': require('../assets/images/jelewery.jpg'),
+    electronics: require('../assets/images/electronics.jpg'),
+    jewelery: require('../assets/images/jelewery.jpg'),
     "men's clothing": require('../assets/images/menClothing.jpg'),
     "women's clothing": require('../assets/images/womenClothing.jpg'),
   };
 
   RenderCategories = ({ item }) => {
     return (
-      <Pressable style={styles.renderContainer}>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate(routes.OTHER_NAVIGATOR, {
+            screen: routes.PRODUCTS,
+            params: { category: item },
+          })
+        }
+        style={styles.renderContainer}>
         <Image style={styles.image} source={images[item]} />
         <Text style={styles.renderText}>{item}</Text>
-      </Pressable>
+      </TouchableOpacity>
     );
   };
 
