@@ -51,7 +51,14 @@ const Home = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <Loader loading={getCategoriesApi.loading || getProductsApi.loading} />
-      <Header isHome onPressBasket={() => console.log('Basket')} />
+      <Header
+        isHome
+        onPressBasket={() =>
+          navigation.navigate(routes.OTHER_NAVIGATOR, {
+            screen: routes.BASKET,
+          })
+        }
+      />
       <SearchBar />
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         <CategoriesList data={getCategoriesApi.data} />
