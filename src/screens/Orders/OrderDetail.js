@@ -15,7 +15,7 @@ import Colors from '../../theme/Colors';
 import { useNavigation } from '@react-navigation/native';
 
 import BackIcon from '../../assets/svgs/back.svg';
-import Tick from '../../assets/svgs/tickIcon.svg';
+import Tick from '../../assets/svgs/TickIcon.svg';
 import OrderIcon from '../../assets/svgs/orders.svg';
 
 const OrderDetail = ({ route }) => {
