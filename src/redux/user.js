@@ -36,6 +36,15 @@ const user = createSlice({
       storage.set('token', state.token);
       storage.set('isLogged', state.isLogged);
     },
+    logOut:(state) => {
+      state.username = ''
+      state.token = ''
+      state.isLogged = false;
+
+      storage.set('username', state.username);
+      storage.set('token', state.token);
+      storage.set('isLogged', state.isLogged);
+    },
     changeFavoriteList: (state, action) => {
       const product = action.payload;
       const isFavorite = state.favoriteList.find(
@@ -88,11 +97,13 @@ const user = createSlice({
       return storage.set('basket', JSON.stringify(state.basket));
     },
     // Sepetten ürünü çıkartma veya azaltma işlemi eklenecek.
+    
   },
 });
 
 export const {
   login,
+  logOut,
   changeFavoriteList,
   addToBasket,
   removeFromBasket,

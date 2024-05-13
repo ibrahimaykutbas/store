@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     width: getRW(342),
   },
   tick: {
-    backgroundColor: Colors.DARK_GREY,
+    backgroundColor: Colors.SOFT_GREY,
     width: getRW(24),
     height: getRW(24),
     borderRadius: 50,
@@ -166,12 +166,12 @@ const styles = StyleSheet.create({
   renderText: {
     fontSize: Fonts.size(17),
     fontWeight: '400',
-    color: Colors.DARK_GREY,
+    color: Colors.SOFT_GREY,
     marginLeft: getRW(12),
   },
   renderDate: {
     fontSize: Fonts.size(14),
-    color: Colors.DARK_GREY,
+    color: Colors.SOFT_GREY,
     fontWeight: '400',
     marginRight: getRW(24),
     marginLeft: getRW(12),

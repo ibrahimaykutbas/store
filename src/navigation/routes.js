@@ -19,6 +19,9 @@ export const routes = {
   NOTIFICATION: 'Notification',
   PROFILE: 'Profile',
   EMAIl_SEND: 'EmailSend',
+  ADDRESS:'Address',
+  PAYMENT:'Payment',
+  WISHLIST:'Wishlist'
 };
 
 export default routes;
