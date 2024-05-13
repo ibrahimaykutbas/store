@@ -27,7 +27,7 @@ const Product = ({ item, propStyle }) => {
         ...styles.product,
         ...propStyle,
       }}
-      key={item?.id.toString()}
+      key={item?.id?.toString()}
       onPress={() =>
         navigation.navigate(routes.OTHER_NAVIGATOR, {
           screen: routes.PRODUCT_DETAIL,
