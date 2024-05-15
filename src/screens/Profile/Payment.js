@@ -1,14 +1,174 @@
-import {View , Text,  StyleSheet, SafeAreaView, } from 'react-native'
-import React from 'react'
+import {
+  View,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
+import React from 'react';
+
+import Back from '../../assets/svgs/back.svg';
+import CardIcon from '../../assets/svgs/masterCard.svg';
+
+import Colors from '../../theme/Colors';
+import { getRH, getRW } from '../../theme/Units';
+import Fonts from '../../theme/Fonts';
+
+import { useNavigation } from '@react-navigation/native';
+import routes from '../../navigation/routes';
 
 const Payment = () => {
+  const navigation = useNavigation();
+
+  const goAddAddress = () => {
+    navigation.navigate(routes.OTHER_NAVIGATOR, {
+      screen: routes.ADD_ADDRESS,
+    });
+  };
   return (
-    <SafeAreaView>
-      <Text>Payment</Text>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.headerContainer}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.goBack()}>
+          <Back width={getRW(17)} height={getRW(17)} />
+        </TouchableOpacity>
+        <Text style={styles.headerText}>Payment</Text>
+      </View>
+
+      <Text style={styles.title}>Cards</Text>
+
+      <View style={styles.innerContainer}>
+        <Text
+          numberOfLines={1}
+          ellipsizeMode="tail"
+          style={styles.innerContainerText}>
+          **** 4187
+          <CardIcon width={getRW(25)} height={getRW(25)} />
+        </Text>
+
+        <TouchableOpacity>
+          <Back
+            width={getRW(17)}
+            height={getRW(17)}
+            style={{ transform: [{ rotateY: '180deg' }] }}
+          />
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.innerContainer}>
+        <Text
+          numberOfLines={1}
+          ellipsizeMode="tail"
+          style={styles.innerContainerText}>
+          **** 5757
+          <CardIcon width={getRW(25)} height={getRW(25)} />
+        </Text>
+
+        <TouchableOpacity>
+          <Back
+            width={getRW(17)}
+            height={getRW(17)}
+            style={{ transform: [{ rotateY: '180deg' }] }}
+          />
+        </TouchableOpacity>
+      </View>
+
+      <TouchableOpacity
+        style={styles.moreButton}
+        onPress={() => goAddAddress()}>
+        <Text style={styles.moreButtonText}>Add Payment Method</Text>
+      </TouchableOpacity>
+
+      <View style={{ marginTop: getRH(32) }}>
+        <Text style={styles.title}>Paypal</Text>
+      </View>
+
+      <View style={styles.innerContainer}>
+        <Text
+          numberOfLines={1}
+          ellipsizeMode="tail"
+          style={styles.innerContainerText}>
+          Cloth@gmail.com
+        </Text>
+
+        <TouchableOpacity>
+          <Back
+            width={getRW(17)}
+            height={getRW(17)}
+            style={{ transform: [{ rotateY: '180deg' }] }}
+          />
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default Payment
+export default Payment;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Colors.WHITE,
+    marginHorizontal: getRW(24),
+    marginTop: getRH(90),
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: getRH(42),
+  },
+  headerText: {
+    color: Colors.BLACK,
+    fontWeight: 'bold',
+    fontSize: Fonts.size(23),
+    marginHorizontal: getRW(110),
+  },
+  button: {
+    backgroundColor: Colors.GREY,
+    width: getRW(40),
+    height: getRW(40),
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    color: Colors.BLACK,
+    fontWeight: 'bold',
+    fontSize: Fonts.size(27),
+  },
+  innerContainer: {
+    width: getRW(342),
+    height: getRH(72),
+    backgroundColor: Colors.GREY,
+    borderRadius: getRH(15),
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginTop: getRH(15),
+    paddingHorizontal: getRW(20),
+  },
+  innerContainerText: {
+    color: Colors.BLACK,
+    fontSize: Fonts.size(17),
+    fontWeight: '400',
+    width: getRW(248),
+  },
+  moreButton: {
+    position: 'absolute',
+    top: getRH(700),
+    right: getRW(0),
+    width: getRW(342),
+    height: getRH(40),
+    backgroundColor: Colors.GREY,
+    borderRadius: getRW(40),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  moreButtonText: {
+    color: Colors.BLACK,
+    fontWeight: 'bold',
+    fontSize: Fonts.size(22),
+  },
+});
