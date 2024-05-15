@@ -5,14 +5,16 @@ import { getRW, getRH } from '../theme/Units';
 import Fonts from '../theme/Fonts';
 
 import BellIcon from '../assets/svgs/bellIcon.svg';
-import BasketIcon from '../assets/svgs/basketLarge.svg';
+import BagIcon from '../assets/svgs/basketLarge.svg';
+import BasketIcon from '../assets/svgs/checkOutIcon.svg'
 
 import Button from './Button';
 
 const Empty = ({ icon = 'Bell', title, button }) => {
   const icons = {
     Bell: <BellIcon width={getRW(170)} height={getRH(170)} />,
-    Basket: <BasketIcon width={getRW(100)} height={getRH(100)} />,
+    Bag: <BagIcon width={getRW(170)} height={getRH(170)} />,
+    Basket: <BasketIcon width={getRW(170)} height={getRH(170)} />,
   };
 
   return (

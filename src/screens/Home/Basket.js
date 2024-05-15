@@ -124,7 +124,7 @@ const Basket = () => {
           renderItem={({ item }) => <CartItem item={item} />}
           ListEmptyComponent={
             <Empty
-              icon="Basket"
+              icon="Bag"
               title="Your Cart is Empty"
               button={{
                 title: 'Explore Categories',
@@ -133,7 +133,7 @@ const Basket = () => {
             />
           }
           ListFooterComponent={() => <Footer />}
-          keyExtractor={item => item.id.toString()}
+          keyExtractor={item => item?.id?.toString()}
           ListFooterComponentStyle={{ marginBottom: getRH(200) }}
           showsVerticalScrollIndicator={false}
           alwaysBounceVertical={false}

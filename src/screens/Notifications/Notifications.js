@@ -5,23 +5,25 @@ import Colors from '../../theme/Colors';
 import { getRH, getRW } from '../../theme/Units';
 import Fonts from '../../theme/Fonts';
 
-import BellIcon from '../../assets/svgs/bellIcon.svg'
+/* import BellIcon from '../../assets/svgs/bellIcon.svg'; */
 import NotificationIcon from '../../assets/svgs/notifications.svg';
 import RedDot from '../../assets/svgs/redDot.svg';
 
-import Button from '../../components/Button';
+/* import Button from '../../components/Button'; */
 
 import routes from '../../navigation/routes';
 import { useNavigation } from '@react-navigation/native';
 
-const Notifications = ({notification = false}) => {
+import Empty from '../../components/Empty';
+
+const Notifications = ({ notification = false }) => {
   const navigation = useNavigation();
 
-  const onPressNotifications = () => {
+  /* const onPressNotifications = () => {
     navigation.navigate(routes.OTHER_NAVIGATOR, {
       screen: routes.CATEGORIES,
     });
-  };
+  }; */
 
   const NotificationTexts = [
     {
@@ -65,8 +67,14 @@ const Notifications = ({notification = false}) => {
         <Text style={styles.headerText}>Notifications</Text>
       </View>
       {notification ? (
+        <FlatList
+          scrollEnabled={false}
+          data={NotificationTexts}
+          renderItem={renderNotification}
+        />
+      ) : (
         <>
-          <View style={styles.innerContainer}>
+          {/* <View style={styles.innerContainer}>
             <BellIcon width={getRW(170)} height={getRH(170)} />
             <Text style={styles.innerContainerText}>No Notification yet</Text>
           </View>
@@ -74,17 +82,26 @@ const Notifications = ({notification = false}) => {
             title="Explore Categories"
             onPress={() => onPressNotifications()}
             containerStyles={styles.button}
+          /> */}
+
+          <Empty
+            icon="Bell"
+            title="No Notification Yet"
+            button={{
+              title: 'Explore Categories',
+              onPress: () =>
+                navigation.navigate(routes.OTHER_NAVIGATOR, {
+                  screen: routes.CATEGORIES,
+                }),
+            }}
           />
         </>
-      ) : (
-        <FlatList scrollEnabled={false} data={NotificationTexts} renderItem={renderNotification} />
       )}
     </View>
   );
 };
 
-
-export default Notifications
+export default Notifications;
 
 const styles = StyleSheet.create({
   container: {
@@ -101,7 +118,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: Fonts.size(23),
   },
-  innerContainer: {
+ /*  innerContainer: {
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: getRH(204),
@@ -113,7 +130,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginHorizontal: getRW(102),
-  },
+  }, */
   renderContainer: {
     flex: 1,
     backgroundColor: Colors.GREY,

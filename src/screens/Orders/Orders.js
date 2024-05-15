@@ -12,25 +12,27 @@ import Colors from '../../theme/Colors';
 import { getRH, getRW } from '../../theme/Units';
 import Fonts from '../../theme/Fonts';
 
-import BasketIcon from '../../assets/svgs/checkOutIcon.svg';
+/* import BasketIcon from '../../assets/svgs/checkOutIcon.svg'; */
 import OrderIcon from '../../assets/svgs/orders.svg';
 import Arrow from '../../assets/svgs/back.svg';
 
-import Button from '../../components/Button';
+/* import Button from '../../components/Button'; */
 
 import routes from '../../navigation/routes';
 import { useNavigation } from '@react-navigation/native';
 
-const Orders = ({ order = false }) => {
+import Empty from '../../components/Empty';
+
+const Orders = ({ order = true }) => {
   const navigation = useNavigation();
 
   const [selectedSection, setSelectedSection] = useState('Procressing');
 
-  const onPressGoCategories = () => {
+  /* const onPressGoCategories = () => {
     navigation.navigate(routes.OTHER_NAVIGATOR, {
       screen: routes.CATEGORIES,
     });
-  };
+  }; */
 
   const onPressGoOrderDetail = orderText => {
     navigation.navigate(routes.OTHER_NAVIGATOR, {
@@ -75,7 +77,6 @@ const Orders = ({ order = false }) => {
         style={styles.renderContainer}>
         <View style={styles.renderInnerContainer}>
           <OrderIcon width={getRW(30)} height={getRH(30)} />
-          {/* order ıcon daha koyu olmalı */}
           <View style={{ flexDirection: 'column', marginRight: getRW(120) }}>
             <Text numberOfLines={2} style={styles.renderContainerText}>
               Order {item.orderNumber}
@@ -101,7 +102,8 @@ const Orders = ({ order = false }) => {
       </View>
       {order ? (
         <>
-          <View style={styles.innerContainer}>
+          
+          {/* <View style={styles.innerContainer}>
             <BasketIcon width={getRW(170)} height={getRH(170)} />
             <Text style={styles.innerContainerText}>No Order yet</Text>
           </View>
@@ -109,43 +111,54 @@ const Orders = ({ order = false }) => {
             title="Explore Categories"
             onPress={() => onPressGoCategories()}
             containerStyles={styles.button}
-          />
+          /> */}
+          <View style={{ height: 300 }}>
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              style={styles.orderProgres}>
+              {sections.map(item => {
+                const isSelected = selectedSection == item;
+
+                return (
+                  <TouchableOpacity
+                    key={item}
+                    onPress={() => onPressSelected(item)}
+                    style={
+                      isSelected
+                        ? styles.selectedOrderInnerContainer
+                        : styles.orderInnerContainer
+                    }>
+                    <Text
+                      style={{
+                        ...styles.orderProgresText,
+                        color: isSelected ? Colors.WHITE : Colors.BLACK,
+                      }}>
+                      {item}
+                    </Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </ScrollView>
+            <FlatList
+              data={OrderTexts}
+              renderItem={renderOrder}
+              alwaysBounceVertical={false}
+            />
+          </View>
         </>
       ) : (
-        <View style={{ height: 300 }}>
-          <ScrollView
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            style={styles.orderProgres}>
-            {sections.map(item => {
-              const isSelected = selectedSection == item;
-
-              return (
-                <TouchableOpacity
-                  key={item}
-                  onPress={() => onPressSelected(item)}
-                  style={
-                    isSelected
-                      ? styles.selectedOrderInnerContainer
-                      : styles.orderInnerContainer
-                  }>
-                  <Text
-                    style={{
-                      ...styles.orderProgresText,
-                      color: isSelected ? Colors.WHITE : Colors.BLACK,
-                    }}>
-                    {item}
-                  </Text>
-                </TouchableOpacity>
-              );
-            })}
-          </ScrollView>
-          <FlatList
-            data={OrderTexts}
-            renderItem={renderOrder}
-            alwaysBounceVertical={false}
-          />
-        </View>
+        <Empty
+          icon="Basket"
+          title="No Order Yet"
+          button={{
+            title: 'Explore Categories',
+            onPress: () =>
+              navigation.navigate(routes.OTHER_NAVIGATOR, {
+                screen: routes.CATEGORIES,
+              }),
+          }}
+        />
       )}
     </View>
   );
@@ -168,7 +181,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: Fonts.size(23),
   },
-  innerContainer: {
+ /*  innerContainer: {
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: getRH(204),
@@ -180,7 +193,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginHorizontal: getRW(102),
-  },
+  }, */
   renderContainer: {
     flex: 1,
     backgroundColor: Colors.GREY,
