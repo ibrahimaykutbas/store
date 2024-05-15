@@ -21,7 +21,8 @@ export const routes = {
   EMAIl_SEND: 'EmailSend',
   ADDRESS:'Address',
   PAYMENT:'Payment',
-  WISHLIST:'Wishlist'
+  WISHLIST:'Wishlist',
+  ADD_ADDRESS:'AddAddress',
 };
 
 export default routes;

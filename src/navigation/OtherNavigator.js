@@ -10,6 +10,7 @@ import Address from '../screens/Profile/Address';
 import Payment from '../screens/Profile/Payment';
 import Wishlist from '../screens/Profile/Wishlist';
 import Basket from '../screens/Home/Basket';
+import AddAddress from '../screens/Profile/AddAddress';
 
 
 import routes from './routes';
@@ -30,6 +31,7 @@ const AuthNavigator = () => {
       <Stack.Screen name={routes.PAYMENT} component={Payment} />
       <Stack.Screen name={routes.WISHLIST} component={Wishlist} />
       <Stack.Screen name={routes.BASKET} component={Basket} />
+      <Stack.Screen name={routes.ADD_ADDRESS} component={AddAddress} />
     </Stack.Navigator>
   );
 };
