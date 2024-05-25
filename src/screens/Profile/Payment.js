@@ -20,9 +20,9 @@ import routes from '../../navigation/routes';
 const Payment = () => {
   const navigation = useNavigation();
 
-  const goAddAddress = () => {
+  const goAddPayment = () => {
     navigation.navigate(routes.OTHER_NAVIGATOR, {
-      screen: routes.ADD_ADDRESS,
+      screen: routes.ADD_PAYMENT,
     });
   };
   return (
@@ -38,7 +38,7 @@ const Payment = () => {
 
       <Text style={styles.title}>Cards</Text>
 
-      <View style={styles.innerContainer}>
+      <TouchableOpacity style={styles.innerContainer}>
         <Text
           numberOfLines={1}
           ellipsizeMode="tail"
@@ -54,9 +54,9 @@ const Payment = () => {
             style={{ transform: [{ rotateY: '180deg' }] }}
           />
         </TouchableOpacity>
-      </View>
+      </TouchableOpacity>
 
-      <View style={styles.innerContainer}>
+      <TouchableOpacity style={styles.innerContainer}>
         <Text
           numberOfLines={1}
           ellipsizeMode="tail"
@@ -72,12 +72,6 @@ const Payment = () => {
             style={{ transform: [{ rotateY: '180deg' }] }}
           />
         </TouchableOpacity>
-      </View>
-
-      <TouchableOpacity
-        style={styles.moreButton}
-        onPress={() => goAddAddress()}>
-        <Text style={styles.moreButtonText}>Add Payment Method</Text>
       </TouchableOpacity>
 
       <View style={{ marginTop: getRH(32) }}>
@@ -100,6 +94,12 @@ const Payment = () => {
           />
         </TouchableOpacity>
       </View>
+
+      <TouchableOpacity
+        style={styles.moreButton}
+        onPress={() => goAddPayment()}>
+        <Text style={styles.moreButtonText}>Add Payment Method</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -161,13 +161,13 @@ const styles = StyleSheet.create({
     right: getRW(0),
     width: getRW(342),
     height: getRH(40),
-    backgroundColor: Colors.GREY,
+    backgroundColor: Colors.PURPLE,
     borderRadius: getRW(40),
     justifyContent: 'center',
     alignItems: 'center',
   },
   moreButtonText: {
-    color: Colors.BLACK,
+    color: Colors.WHITE,
     fontWeight: 'bold',
     fontSize: Fonts.size(22),
   },
