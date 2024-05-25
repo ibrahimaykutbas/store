@@ -23,6 +23,7 @@ export const routes = {
   PAYMENT:'Payment',
   WISHLIST:'Wishlist',
   ADD_ADDRESS:'AddAddress',
+  ADD_PAYMENT:'AddPayment'
 };
 
 export default routes;

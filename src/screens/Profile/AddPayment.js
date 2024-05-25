@@ -18,13 +18,13 @@ import Colors from '../../theme/Colors';
 import Fonts from '../../theme/Fonts';
 import { getRH, getRW } from '../../theme/Units';
 
-const AddAddress = () => {
+const AddPayment = () => {
   const navigation = useNavigation();
   const [value, setValue] = useState('');
 
-  const saveAddress = () => {
+  const savePayment = () => {
     navigation.navigate(routes.OTHER_NAVIGATOR, {
-      screen: routes.ADDRESS,
+      screen: routes.PAYMENT,
     });
   };
 
@@ -36,19 +36,13 @@ const AddAddress = () => {
           onPress={() => navigation.goBack()}>
           <Back width={getRW(17)} height={getRW(17)} />
         </TouchableOpacity>
-        <Text style={styles.headerText}>Add Address</Text>
+        <Text style={styles.headerText}>Add Card</Text>
       </View>
 
       <Input
         value={value}
         onChangeText={setValue}
-        placeholder="Street Address"
-        propStyles={styles.ınput}
-        inputStyles={styles.ınputText}
-        placeholderTextColor={Colors.SOFT_GREY}
-      />
-      <Input
-        placeholder="City"
+        placeholder="Card Number"
         propStyles={styles.ınput}
         inputStyles={styles.ınputText}
         placeholderTextColor={Colors.SOFT_GREY}
@@ -58,7 +52,7 @@ const AddAddress = () => {
         <Input
           value={value}
           onChangeText={setValue}
-          placeholder="State"
+          placeholder="CCV"
           propStyles={styles.innerInput}
           inputStyles={styles.ınputText}
           placeholderTextColor={Colors.SOFT_GREY}
@@ -67,21 +61,30 @@ const AddAddress = () => {
         <Input
           value={value}
           onChangeText={setValue}
-          placeholder="Zip Code"
+          placeholder="Exp"
           propStyles={styles.innerInput}
           inputStyles={styles.ınputText}
           placeholderTextColor={Colors.SOFT_GREY}
         />
       </View>
 
-      <TouchableOpacity style={styles.moreButton} onPress={() => saveAddress()}>
+      <Input
+        value={value}
+        onChangeText={setValue}
+        placeholder="Cardholder Name"
+        propStyles={styles.ınput}
+        inputStyles={styles.ınputText}
+        placeholderTextColor={Colors.SOFT_GREY}
+      />
+
+      <TouchableOpacity style={styles.moreButton} onPress={() => savePayment()}>
         <Text style={styles.moreButtonText}>Save</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
 };
 
-export default AddAddress;
+export default AddPayment;
 
 const styles = StyleSheet.create({
   container: {
@@ -118,13 +121,12 @@ const styles = StyleSheet.create({
   ınputText: {},
   innerContainer: {
     flexDirection: 'row',
-    justifyContent:'space-between',
-    alignItems:'center'
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   innerInput: {
     width: getRW(160),
     borderRadius: getRW(10),
-
   },
   moreButton: {
     position: 'absolute',

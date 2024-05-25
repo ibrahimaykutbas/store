@@ -13,6 +13,8 @@ const Input = ({
   placeholder,
   isSecure,
   propStyles,
+  inputStyles,
+  placeholderTextColor,
   icon = false,
 }) => {
   return (
@@ -24,11 +26,11 @@ const Input = ({
       <View style={styles.leftSide}>
         {icon && <SearchIcon width={getRW(20)} height={getRH(20)} />}
         <TextInput
-          style={styles.input}
+          style={{ ...styles.input, ...inputStyles }}
           value={value}
           onChangeText={onChangeText}
           placeholder={placeholder}
-          placeholderTextColor={Colors.BLACK}
+          placeholderTextColor={placeholderTextColor}
           secureTextEntry={isSecure}
           autoCapitalize="none"
         />
