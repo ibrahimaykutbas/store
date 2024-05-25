@@ -14,6 +14,7 @@ import AddAddress from '../screens/Profile/AddAddress';
 
 
 import routes from './routes';
+import AddPayment from '../screens/Profile/AddPayment';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +33,7 @@ const AuthNavigator = () => {
       <Stack.Screen name={routes.WISHLIST} component={Wishlist} />
       <Stack.Screen name={routes.BASKET} component={Basket} />
       <Stack.Screen name={routes.ADD_ADDRESS} component={AddAddress} />
+      <Stack.Screen name={routes.ADD_PAYMENT} component={AddPayment} />
     </Stack.Navigator>
   );
 };
