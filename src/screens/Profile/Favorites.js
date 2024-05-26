@@ -31,7 +31,7 @@ const Favorites = ({ route }) => {
           onPress={() => navigation.goBack()}>
           <Back width={getRW(17)} height={getRW(17)} />
         </TouchableOpacity>
-        <Text style={styles.headerText}>Favorites {favoriteList.length}</Text>
+        <Text style={styles.headerText}>Favorites ({favoriteList.length})</Text>
       </View>
 
       <FlatList
