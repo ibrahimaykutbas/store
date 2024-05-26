@@ -49,51 +49,53 @@ const Profile = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Image
-        style={styles.profileImage}
-        source={require('../../assets/images/profilePhoto.png')}
-      />
-      <View style={styles.profileInfoContainer}>
-        <View style={styles.profileTextContainer}>
-          <Text style={styles.profileNameText}>Gilbert Jones</Text>
-          <Text style={styles.profileInfoText}>Glbertjones001@gmail.com</Text>
-          <Text style={styles.profileInfoText}>121-224-7890</Text>
+      <View style={styles.innerContainer}>
+        <Image
+          style={styles.profileImage}
+          source={require('../../assets/images/profilePhoto.png')}
+        />
+        <View style={styles.profileInfoContainer}>
+          <View style={styles.profileTextContainer}>
+            <Text style={styles.profileNameText}>Gilbert Jones</Text>
+            <Text style={styles.profileInfoText}>Glbertjones001@gmail.com</Text>
+            <Text style={styles.profileInfoText}>121-224-7890</Text>
+          </View>
+          <TouchableOpacity>
+            <Text style={styles.profileInfoButton}>Edit</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity>
-          <Text style={styles.profileInfoButton}>Edit</Text>
+
+        <RenderItem
+          title="Address"
+          onPress={() => {
+            navigation.navigate(routes.OTHER_NAVIGATOR, {
+              screen: routes.ADDRESS,
+            });
+          }}
+        />
+        <RenderItem
+          title="Wishlist"
+          onPress={() => {
+            navigation.navigate(routes.OTHER_NAVIGATOR, {
+              screen: routes.WISHLIST,
+            });
+          }}
+        />
+        <RenderItem
+          title="Payment"
+          onPress={() => {
+            navigation.navigate(routes.OTHER_NAVIGATOR, {
+              screen: routes.PAYMENT,
+            });
+          }}
+        />
+        <RenderItem title="Help" onPress={() => {}} />
+        <RenderItem title="Support" onPress={() => {}} />
+
+        <TouchableOpacity onPress={onPressLogOut} style={styles.singOut}>
+          <Text style={styles.singOutText}>Sing Out</Text>
         </TouchableOpacity>
       </View>
-
-      <RenderItem
-        title="Address"
-        onPress={() => {
-          navigation.navigate(routes.OTHER_NAVIGATOR, {
-            screen: routes.ADDRESS,
-          });
-        }}
-      />
-      <RenderItem
-        title="Wishlist"
-        onPress={() => {
-          navigation.navigate(routes.OTHER_NAVIGATOR, {
-            screen: routes.WISHLIST,
-          });
-        }}
-      />
-      <RenderItem
-        title="Payment"
-        onPress={() => {
-          navigation.navigate(routes.OTHER_NAVIGATOR, {
-            screen: routes.PAYMENT,
-          });
-        }}
-      />
-      <RenderItem title="Help" onPress={() => {}} />
-      <RenderItem title="Support" onPress={() => {}} />
-
-      <TouchableOpacity onPress={onPressLogOut} style={styles.singOut}>
-        <Text style={styles.singOutText}>Sing Out</Text>
-      </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -104,6 +106,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.WHITE,
+  },
+  innerContainer: {
     marginHorizontal: getRW(24),
   },
   profileImage: {
@@ -172,7 +176,7 @@ const styles = StyleSheet.create({
     marginTop: getRH(36),
   },
   singOutText: {
-    color:Colors.RED,
+    color: Colors.RED,
     fontSize: Fonts.size(17),
     fontWeight: 'bold',
   },
