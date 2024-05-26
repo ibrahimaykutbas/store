@@ -14,12 +14,16 @@ const favoriteList = favoriteListStorage && JSON.parse(favoriteListStorage);
 const basketStorage = storage.getString('basket');
 const basket = basketStorage && JSON.parse(basketStorage);
 
+const addressesStorage = storage.getString('addresses');
+const addresses = addressesStorage && JSON.parse(addressesStorage);
+
 const initialState = {
   username: username || '',
   token: token || '',
   isLogged: isLogged || false,
   favoriteList: favoriteList || [],
   basket: basket || [],
+  addresses: addresses || [],
 };
 
 const user = createSlice({
@@ -36,9 +40,9 @@ const user = createSlice({
       storage.set('token', state.token);
       storage.set('isLogged', state.isLogged);
     },
-    logOut:(state) => {
-      state.username = ''
-      state.token = ''
+    logOut: state => {
+      state.username = '';
+      state.token = '';
       state.isLogged = false;
 
       storage.set('username', state.username);
@@ -96,8 +100,27 @@ const user = createSlice({
       state.basket = [];
       return storage.set('basket', JSON.stringify(state.basket));
     },
-    // Sepetten ürünü çıkartma veya azaltma işlemi eklenecek.
-    
+    addAddress: (state, action) => {
+      const address = action.payload;
+      const isExist = state.addresses.find(item => item.id === address.id);
+
+      if (isExist) {
+        state.addresses = state.addresses.map(item =>
+          item.id === address.id ? address : item,
+        );
+      } else {
+        state.addresses.push(address);
+      }
+
+      return storage.set('addresses', JSON.stringify(state.addresses));
+    },
+    removeAddress: (state, action) => {
+      const id = action.payload;
+      const newAddresses = state.addresses.filter(item => item.id !== id);
+      state.addresses = newAddresses;
+
+      return storage.set('addresses', JSON.stringify(state.addresses));
+    },
   },
 });
 
@@ -108,6 +131,8 @@ export const {
   addToBasket,
   removeFromBasket,
   clearBasket,
+  addAddress,
+  removeAddress,
 } = user.actions;
 
 export default user.reducer;

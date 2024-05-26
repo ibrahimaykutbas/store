@@ -16,14 +16,25 @@ import Fonts from '../../theme/Fonts';
 import { useNavigation } from '@react-navigation/native';
 import routes from '../../navigation/routes';
 
+import { useSelector } from 'react-redux';
+
 const Address = () => {
   const navigation = useNavigation();
+  const { addresses } = useSelector(state => state.user);
 
   const goAddAddress = () => {
     navigation.navigate(routes.OTHER_NAVIGATOR, {
       screen: routes.ADD_ADDRESS,
     });
   };
+
+  const goToDetail = address => {
+    navigation.navigate(routes.OTHER_NAVIGATOR, {
+      screen: routes.ADD_ADDRESS,
+      params: { address },
+    });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
@@ -35,29 +46,20 @@ const Address = () => {
         <Text style={styles.headerText}>Address</Text>
       </View>
 
-      <View style={styles.innerContainer}>
-        <Text
-          numberOfLines={1}
-          ellipsizeMode="tail"
-          style={styles.innerContainerText}>
-          2715 Ash Dr. San Jose, South Dakota 83475
-        </Text>
-        <TouchableOpacity>
-          <Text style={styles.innerContainerButtonText}>Edit</Text>
-        </TouchableOpacity>
-      </View>
+      {addresses?.map(address => (
+        <View style={styles.innerContainer} key={address.id}>
+          <Text
+            numberOfLines={1}
+            ellipsizeMode="tail"
+            style={styles.innerContainerText}>
+            {address.street} {address.city} {address.state} {address.zipCode}
+          </Text>
+          <TouchableOpacity onPress={() => goToDetail(address)}>
+            <Text style={styles.innerContainerButtonText}>Edit</Text>
+          </TouchableOpacity>
+        </View>
+      ))}
 
-      <View style={styles.innerContainer}>
-        <Text
-          numberOfLines={1}
-          ellipsizeMode="tail"
-          style={styles.innerContainerText}>
-          2715 Ash Dr. San Jose, South Dakota 83475
-        </Text>
-        <TouchableOpacity>
-          <Text style={styles.innerContainerButtonText}>Edit</Text>
-        </TouchableOpacity>
-      </View>
       <TouchableOpacity
         style={styles.moreButton}
         onPress={() => goAddAddress()}>
