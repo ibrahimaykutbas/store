@@ -61,6 +61,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   input: {
+    width: '95%',
     marginLeft: getRW(10),
   },
 });
