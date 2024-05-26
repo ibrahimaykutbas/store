@@ -7,25 +7,26 @@ import Fonts from '../../theme/Fonts';
 
 import routes from '../../navigation/routes';
 
-import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 import MailIcon from '../../assets/svgs/mailImage.svg';
 
-const EmailSend = ({navigation}) => {
+const EmailSend = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.content}>
-      <View style={styles.ımageContainer}>
-        <MailIcon width={getRW(110)} height={getRW(110)} />
-      </View>
-      <Text style={styles.showContentText}>
-        We Sent you an Email to reset your password.
-      </Text>
-      <View style={styles.buttonContainer}>
-        <Button
-          title="Return to Login"
-          onPress={() => navigation.navigate(routes.LOGIN)}
-        />
+      <View style={styles.innerContainer}>
+        <View style={styles.ımageContainer}>
+          <MailIcon width={getRW(110)} height={getRW(110)} />
+        </View>
+        <Text style={styles.showContentText}>
+          We Sent you an Email to reset your password.
+        </Text>
+        <View style={styles.buttonContainer}>
+          <Button
+            title="Return to Login"
+            onPress={() => navigation.navigate(routes.LOGIN)}
+          />
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -37,8 +38,11 @@ export const styles = StyleSheet.create({
   content: {
     flex: 1,
     backgroundColor: Colors.WHITE,
-    marginHorizontal: getRH(24),
   },
+  innerContainer: {
+    marginHorizontal: getRW(24),
+  },
+
   ımageContainer: {
     justifyContent: 'center',
     alignItems: 'center',

@@ -75,68 +75,70 @@ const AddAddress = ({ route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.goBack()}>
-          <Back width={getRW(17)} height={getRW(17)} />
-        </TouchableOpacity>
-        <Text style={styles.headerText}>Add Address</Text>
-      </View>
+      <View style={styles.content}>
+        <View style={styles.headerContainer}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.goBack()}>
+            <Back width={getRW(17)} height={getRW(17)} />
+          </TouchableOpacity>
+          <Text style={styles.headerText}>Add Address</Text>
+        </View>
 
-      <Input
-        value={address.street}
-        onChangeText={text => setAddress({ ...address, street: text })}
-        placeholder="Street Address"
-        propStyles={styles.ınput}
-        inputStyles={styles.ınputText}
-        placeholderTextColor={Colors.SOFT_GREY}
-      />
-      <Input
-        value={address.city}
-        onChangeText={text => setAddress({ ...address, city: text })}
-        placeholder="City"
-        propStyles={styles.ınput}
-        inputStyles={styles.ınputText}
-        placeholderTextColor={Colors.SOFT_GREY}
-      />
-
-      <View style={styles.innerContainer}>
         <Input
-          value={address.state}
-          onChangeText={text => setAddress({ ...address, state: text })}
-          placeholder="State"
-          propStyles={styles.innerInput}
+          value={address.street}
+          onChangeText={text => setAddress({ ...address, street: text })}
+          placeholder="Street Address"
+          propStyles={styles.ınput}
+          inputStyles={styles.ınputText}
+          placeholderTextColor={Colors.SOFT_GREY}
+        />
+        <Input
+          value={address.city}
+          onChangeText={text => setAddress({ ...address, city: text })}
+          placeholder="City"
+          propStyles={styles.ınput}
           inputStyles={styles.ınputText}
           placeholderTextColor={Colors.SOFT_GREY}
         />
 
-        <Input
-          value={address.zipCode}
-          onChangeText={text => setAddress({ ...address, zipCode: text })}
-          placeholder="Zip Code"
-          propStyles={styles.innerInput}
-          inputStyles={styles.ınputText}
-          placeholderTextColor={Colors.SOFT_GREY}
-        />
-      </View>
+        <View style={styles.innerContainer}>
+          <Input
+            value={address.state}
+            onChangeText={text => setAddress({ ...address, state: text })}
+            placeholder="State"
+            propStyles={styles.innerInput}
+            inputStyles={styles.ınputText}
+            placeholderTextColor={Colors.SOFT_GREY}
+          />
 
-      <TouchableOpacity
-        style={{
-          ...styles.moreButton,
-          top: editAddress ? getRH(620) : getRH(700),
-        }}
-        onPress={() => saveAddress()}>
-        <Text style={styles.moreButtonText}>Save</Text>
-      </TouchableOpacity>
+          <Input
+            value={address.zipCode}
+            onChangeText={text => setAddress({ ...address, zipCode: text })}
+            placeholder="Zip Code"
+            propStyles={styles.innerInput}
+            inputStyles={styles.ınputText}
+            placeholderTextColor={Colors.SOFT_GREY}
+          />
+        </View>
 
-      {editAddress && (
         <TouchableOpacity
-          style={styles.moreButton}
-          onPress={onPressRemoveAddress}>
-          <Text style={styles.moreButtonText}>Delete</Text>
+          style={{
+            ...styles.moreButton,
+            top: editAddress ? getRH(620) : getRH(700),
+          }}
+          onPress={() => saveAddress()}>
+          <Text style={styles.moreButtonText}>Save</Text>
         </TouchableOpacity>
-      )}
+
+        {editAddress && (
+          <TouchableOpacity
+            style={styles.moreButton}
+            onPress={onPressRemoveAddress}>
+            <Text style={styles.moreButtonText}>Delete</Text>
+          </TouchableOpacity>
+        )}
+      </View>
     </SafeAreaView>
   );
 };
@@ -147,8 +149,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.WHITE,
-    marginHorizontal: getRW(24),
     marginTop: getRH(90),
+  },
+  content: {
+    marginHorizontal: getRW(24),
   },
   headerContainer: {
     flexDirection: 'row',
