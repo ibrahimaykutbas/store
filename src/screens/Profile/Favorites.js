@@ -34,7 +34,6 @@ const Favorites = ({ route }) => {
         <Text style={styles.headerText}>Favorites {favoriteList.length}</Text>
       </View>
 
-      <Text>Favorites</Text>
       <FlatList
         data={favoriteList}
         renderItem={({ item }) => (
