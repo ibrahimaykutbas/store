@@ -30,56 +30,60 @@ const AddPayment = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
+      <View style={styles.content}>
+        <View style={styles.headerContainer}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.goBack()}>
+            <Back width={getRW(17)} height={getRW(17)} />
+          </TouchableOpacity>
+          <Text style={styles.headerText}>Add Card</Text>
+        </View>
+
+        <Input
+          value={value}
+          onChangeText={setValue}
+          placeholder="Card Number"
+          propStyles={styles.ınput}
+          inputStyles={styles.ınputText}
+          placeholderTextColor={Colors.SOFT_GREY}
+        />
+
+        <View style={styles.innerContainer}>
+          <Input
+            value={value}
+            onChangeText={setValue}
+            placeholder="CCV"
+            propStyles={styles.innerInput}
+            inputStyles={styles.ınputText}
+            placeholderTextColor={Colors.SOFT_GREY}
+          />
+
+          <Input
+            value={value}
+            onChangeText={setValue}
+            placeholder="Exp"
+            propStyles={styles.innerInput}
+            inputStyles={styles.ınputText}
+            placeholderTextColor={Colors.SOFT_GREY}
+          />
+        </View>
+
+        <Input
+          value={value}
+          onChangeText={setValue}
+          placeholder="Cardholder Name"
+          propStyles={styles.ınput}
+          inputStyles={styles.ınputText}
+          placeholderTextColor={Colors.SOFT_GREY}
+        />
+
         <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.goBack()}>
-          <Back width={getRW(17)} height={getRW(17)} />
+          style={styles.moreButton}
+          onPress={() => savePayment()}>
+          <Text style={styles.moreButtonText}>Save</Text>
         </TouchableOpacity>
-        <Text style={styles.headerText}>Add Card</Text>
       </View>
-
-      <Input
-        value={value}
-        onChangeText={setValue}
-        placeholder="Card Number"
-        propStyles={styles.ınput}
-        inputStyles={styles.ınputText}
-        placeholderTextColor={Colors.SOFT_GREY}
-      />
-
-      <View style={styles.innerContainer}>
-        <Input
-          value={value}
-          onChangeText={setValue}
-          placeholder="CCV"
-          propStyles={styles.innerInput}
-          inputStyles={styles.ınputText}
-          placeholderTextColor={Colors.SOFT_GREY}
-        />
-
-        <Input
-          value={value}
-          onChangeText={setValue}
-          placeholder="Exp"
-          propStyles={styles.innerInput}
-          inputStyles={styles.ınputText}
-          placeholderTextColor={Colors.SOFT_GREY}
-        />
-      </View>
-
-      <Input
-        value={value}
-        onChangeText={setValue}
-        placeholder="Cardholder Name"
-        propStyles={styles.ınput}
-        inputStyles={styles.ınputText}
-        placeholderTextColor={Colors.SOFT_GREY}
-      />
-
-      <TouchableOpacity style={styles.moreButton} onPress={() => savePayment()}>
-        <Text style={styles.moreButtonText}>Save</Text>
-      </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -90,8 +94,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.WHITE,
-    marginHorizontal: getRW(24),
     marginTop: getRH(90),
+  },
+  content: {
+    marginHorizontal: getRW(24),
   },
   headerContainer: {
     flexDirection: 'row',

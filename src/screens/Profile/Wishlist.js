@@ -34,80 +34,82 @@ const Wishlist = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
+      <View style={styles.content}>
+        <View style={styles.headerContainer}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.goBack()}>
+            <Back width={getRW(17)} height={getRW(17)} />
+          </TouchableOpacity>
+          <Text style={styles.headerText}>Wishlist</Text>
+        </View>
+
         <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.goBack()}>
-          <Back width={getRW(17)} height={getRW(17)} />
+          style={styles.innerContainer}
+          onPress={() => goFavorites()}>
+          <HeartIcon
+            width={getRW(25)}
+            height={getRH(25)}
+            fill={Colors.WHITE}
+            stroke={Colors.BLACK}
+          />
+          <View>
+            <Text
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              style={styles.innerContainerHeaderText}>
+              My Favorite
+            </Text>
+
+            <Text
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              style={styles.innerContainerText}>
+              {favoriteList.length} products
+            </Text>
+          </View>
+
+          <TouchableOpacity>
+            <Back
+              width={getRW(17)}
+              height={getRW(17)}
+              style={{ transform: [{ rotateY: '180deg' }] }}
+            />
+          </TouchableOpacity>
         </TouchableOpacity>
-        <Text style={styles.headerText}>Wishlist</Text>
+
+        <TouchableOpacity style={styles.innerContainer}>
+          <HeartIcon
+            width={getRW(25)}
+            height={getRH(25)}
+            fill={Colors.WHITE}
+            stroke={Colors.BLACK}
+          />
+          <View>
+            <Text
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              style={styles.innerContainerHeaderText}>
+              Others
+            </Text>
+
+            <Text
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              style={styles.innerContainerText}>
+              13 products
+            </Text>
+          </View>
+
+          <TouchableOpacity>
+            <Back
+              width={getRW(17)}
+              height={getRW(17)}
+              style={{ transform: [{ rotateY: '180deg' }] }}
+            />
+          </TouchableOpacity>
+        </TouchableOpacity>
       </View>
-
-      <TouchableOpacity
-        style={styles.innerContainer}
-        onPress={() => goFavorites()}>
-        <HeartIcon
-          width={getRW(25)}
-          height={getRH(25)}
-          fill={Colors.WHITE}
-          stroke={Colors.BLACK}
-        />
-        <View>
-          <Text
-            numberOfLines={1}
-            ellipsizeMode="tail"
-            style={styles.innerContainerHeaderText}>
-            My Favorite
-          </Text>
-
-          <Text
-            numberOfLines={1}
-            ellipsizeMode="tail"
-            style={styles.innerContainerText}>
-            {favoriteList.length} products
-          </Text>
-        </View>
-
-        <TouchableOpacity>
-          <Back
-            width={getRW(17)}
-            height={getRW(17)}
-            style={{ transform: [{ rotateY: '180deg' }] }}
-          />
-        </TouchableOpacity>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.innerContainer}>
-        <HeartIcon
-          width={getRW(25)}
-          height={getRH(25)}
-          fill={Colors.WHITE}
-          stroke={Colors.BLACK}
-        />
-        <View>
-          <Text
-            numberOfLines={1}
-            ellipsizeMode="tail"
-            style={styles.innerContainerHeaderText}>
-            Others
-          </Text>
-
-          <Text
-            numberOfLines={1}
-            ellipsizeMode="tail"
-            style={styles.innerContainerText}>
-            13 products
-          </Text>
-        </View>
-
-        <TouchableOpacity>
-          <Back
-            width={getRW(17)}
-            height={getRW(17)}
-            style={{ transform: [{ rotateY: '180deg' }] }}
-          />
-        </TouchableOpacity>
-      </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -118,8 +120,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.WHITE,
-    marginHorizontal: getRW(24),
     marginTop: getRH(90),
+  },
+  content: {
+    marginHorizontal: getRW(24),
   },
   headerContainer: {
     flexDirection: 'row',

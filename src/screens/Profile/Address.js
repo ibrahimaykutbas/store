@@ -37,34 +37,36 @@ const Address = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.goBack()}>
-          <Back width={getRW(17)} height={getRW(17)} />
-        </TouchableOpacity>
-        <Text style={styles.headerText}>Address</Text>
-      </View>
-
-      {addresses?.map(address => (
-        <View style={styles.innerContainer} key={address.id}>
-          <Text
-            numberOfLines={1}
-            ellipsizeMode="tail"
-            style={styles.innerContainerText}>
-            {address.street} {address.city} {address.state} {address.zipCode}
-          </Text>
-          <TouchableOpacity onPress={() => goToDetail(address)}>
-            <Text style={styles.innerContainerButtonText}>Edit</Text>
+      <View style={styles.content}>
+        <View style={styles.headerContainer}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.goBack()}>
+            <Back width={getRW(17)} height={getRW(17)} />
           </TouchableOpacity>
+          <Text style={styles.headerText}>Address</Text>
         </View>
-      ))}
 
-      <TouchableOpacity
-        style={styles.moreButton}
-        onPress={() => goAddAddress()}>
-        <Text style={styles.moreButtonText}>Add Address</Text>
-      </TouchableOpacity>
+        {addresses?.map(address => (
+          <View style={styles.innerContainer} key={address.id}>
+            <Text
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              style={styles.innerContainerText}>
+              {address.street} {address.city} {address.state} {address.zipCode}
+            </Text>
+            <TouchableOpacity onPress={() => goToDetail(address)}>
+              <Text style={styles.innerContainerButtonText}>Edit</Text>
+            </TouchableOpacity>
+          </View>
+        ))}
+
+        <TouchableOpacity
+          style={styles.moreButton}
+          onPress={() => goAddAddress()}>
+          <Text style={styles.moreButtonText}>Add Address</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };
@@ -75,8 +77,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.WHITE,
-    marginHorizontal: getRW(24),
     marginTop: getRH(90),
+  },
+  content: {
+    marginHorizontal: getRW(24),
   },
   headerContainer: {
     flexDirection: 'row',

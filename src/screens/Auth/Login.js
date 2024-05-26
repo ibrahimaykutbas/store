@@ -58,9 +58,9 @@ const Login = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Sign in</Text>
-
       <View style={styles.innerContainer}>
+        <Text style={styles.title}>Sign in</Text>
+
         <Input
           value={username}
           onChangeText={setUsername}
@@ -140,7 +140,6 @@ export const styles = StyleSheet.create({
     fontSize: Fonts.size(32),
     fontWeight: '700',
     marginTop: getRH(123),
-    marginLeft: getRH(27),
     marginBottom: getRH(32),
   },
   innerContainer: {

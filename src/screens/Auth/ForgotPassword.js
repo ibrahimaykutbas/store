@@ -22,8 +22,8 @@ const ForgotPassword = ({ navigation }) => {
   const [email, setEmail] = useState('');
 
   return (
-    <View style={styles.container}>
-      <SafeAreaView>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.innerContainer}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
           style={styles.backIconContainer}>
@@ -31,7 +31,7 @@ const ForgotPassword = ({ navigation }) => {
         </TouchableOpacity>
         <Text style={styles.title}>Forgot Password</Text>
 
-        <View style={styles.innerContainer}>
+        <View style={styles.content}>
           <Input
             value={email}
             onChangeText={setEmail}
@@ -44,8 +44,8 @@ const ForgotPassword = ({ navigation }) => {
             disabled={email == ''}
           />
         </View>
-      </SafeAreaView>
-    </View>
+      </View>
+    </SafeAreaView>
   );
 };
 
@@ -56,6 +56,9 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.WHITE,
   },
+  innerContainer: {
+    marginHorizontal: getRW(24),
+  },
   backIconContainer: {
     backgroundColor: Colors.GREY,
     width: getRW(30),
@@ -64,18 +67,15 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: getRH(63),
-    marginLeft: getRH(27),
   },
   title: {
     color: Colors.BLACK,
     fontSize: Fonts.size(32),
     fontWeight: '700',
     marginTop: getRH(20),
-    marginLeft: getRH(27),
     marginBottom: getRH(32),
   },
-  innerContainer: {
+  content: {
     flex: 1,
-    marginHorizontal: getRH(23),
   },
 });

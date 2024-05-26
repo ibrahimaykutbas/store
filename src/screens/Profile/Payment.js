@@ -27,79 +27,81 @@ const Payment = () => {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
+      <View style={styles.content}>
+        <View style={styles.headerContainer}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.goBack()}>
+            <Back width={getRW(17)} height={getRW(17)} />
+          </TouchableOpacity>
+          <Text style={styles.headerText}>Payment</Text>
+        </View>
+
+        <Text style={styles.title}>Cards</Text>
+
+        <TouchableOpacity style={styles.innerContainer}>
+          <Text
+            numberOfLines={1}
+            ellipsizeMode="tail"
+            style={styles.innerContainerText}>
+            **** 4187
+            <CardIcon width={getRW(25)} height={getRW(25)} />
+          </Text>
+
+          <TouchableOpacity>
+            <Back
+              width={getRW(17)}
+              height={getRW(17)}
+              style={{ transform: [{ rotateY: '180deg' }] }}
+            />
+          </TouchableOpacity>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.innerContainer}>
+          <Text
+            numberOfLines={1}
+            ellipsizeMode="tail"
+            style={styles.innerContainerText}>
+            **** 5757
+            <CardIcon width={getRW(25)} height={getRW(25)} />
+          </Text>
+
+          <TouchableOpacity>
+            <Back
+              width={getRW(17)}
+              height={getRW(17)}
+              style={{ transform: [{ rotateY: '180deg' }] }}
+            />
+          </TouchableOpacity>
+        </TouchableOpacity>
+
+        <View style={{ marginTop: getRH(32) }}>
+          <Text style={styles.title}>Paypal</Text>
+        </View>
+
+        <View style={styles.innerContainer}>
+          <Text
+            numberOfLines={1}
+            ellipsizeMode="tail"
+            style={styles.innerContainerText}>
+            Cloth@gmail.com
+          </Text>
+
+          <TouchableOpacity>
+            <Back
+              width={getRW(17)}
+              height={getRW(17)}
+              style={{ transform: [{ rotateY: '180deg' }] }}
+            />
+          </TouchableOpacity>
+        </View>
+
         <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.goBack()}>
-          <Back width={getRW(17)} height={getRW(17)} />
-        </TouchableOpacity>
-        <Text style={styles.headerText}>Payment</Text>
-      </View>
-
-      <Text style={styles.title}>Cards</Text>
-
-      <TouchableOpacity style={styles.innerContainer}>
-        <Text
-          numberOfLines={1}
-          ellipsizeMode="tail"
-          style={styles.innerContainerText}>
-          **** 4187
-          <CardIcon width={getRW(25)} height={getRW(25)} />
-        </Text>
-
-        <TouchableOpacity>
-          <Back
-            width={getRW(17)}
-            height={getRW(17)}
-            style={{ transform: [{ rotateY: '180deg' }] }}
-          />
-        </TouchableOpacity>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.innerContainer}>
-        <Text
-          numberOfLines={1}
-          ellipsizeMode="tail"
-          style={styles.innerContainerText}>
-          **** 5757
-          <CardIcon width={getRW(25)} height={getRW(25)} />
-        </Text>
-
-        <TouchableOpacity>
-          <Back
-            width={getRW(17)}
-            height={getRW(17)}
-            style={{ transform: [{ rotateY: '180deg' }] }}
-          />
-        </TouchableOpacity>
-      </TouchableOpacity>
-
-      <View style={{ marginTop: getRH(32) }}>
-        <Text style={styles.title}>Paypal</Text>
-      </View>
-
-      <View style={styles.innerContainer}>
-        <Text
-          numberOfLines={1}
-          ellipsizeMode="tail"
-          style={styles.innerContainerText}>
-          Cloth@gmail.com
-        </Text>
-
-        <TouchableOpacity>
-          <Back
-            width={getRW(17)}
-            height={getRW(17)}
-            style={{ transform: [{ rotateY: '180deg' }] }}
-          />
+          style={styles.moreButton}
+          onPress={() => goAddPayment()}>
+          <Text style={styles.moreButtonText}>Add Payment Method</Text>
         </TouchableOpacity>
       </View>
-
-      <TouchableOpacity
-        style={styles.moreButton}
-        onPress={() => goAddPayment()}>
-        <Text style={styles.moreButtonText}>Add Payment Method</Text>
-      </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -110,8 +112,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.WHITE,
-    marginHorizontal: getRW(24),
     marginTop: getRH(90),
+  },
+  content: {
+    marginHorizontal: getRW(24),
   },
   headerContainer: {
     flexDirection: 'row',
