@@ -4,8 +4,11 @@ import {
   SafeAreaView,
   TouchableOpacity,
   StyleSheet,
+  LogBox,
 } from 'react-native';
 import React from 'react';
+
+import { useSelector } from 'react-redux';
 
 import Back from '../../assets/svgs/back.svg';
 import HeartIcon from '../../assets/svgs/heart.svg';
@@ -20,6 +23,15 @@ import routes from '../../navigation/routes';
 const Wishlist = () => {
   const navigation = useNavigation();
 
+  const favoriteList = useSelector(state => state.user.favoriteList);
+
+  const goFavorites = () => {
+    navigation.navigate(routes.OTHER_NAVIGATOR, {
+      screen: routes.FAVORITES,
+      params: { favoriteList },
+    });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
@@ -31,7 +43,9 @@ const Wishlist = () => {
         <Text style={styles.headerText}>Wishlist</Text>
       </View>
 
-      <TouchableOpacity style={styles.innerContainer}>
+      <TouchableOpacity
+        style={styles.innerContainer}
+        onPress={() => goFavorites()}>
         <HeartIcon
           width={getRW(25)}
           height={getRH(25)}
@@ -50,7 +64,7 @@ const Wishlist = () => {
             numberOfLines={1}
             ellipsizeMode="tail"
             style={styles.innerContainerText}>
-            12 products
+            {favoriteList.length} products
           </Text>
         </View>
 
@@ -75,14 +89,14 @@ const Wishlist = () => {
             numberOfLines={1}
             ellipsizeMode="tail"
             style={styles.innerContainerHeaderText}>
-            My Favorite
+            Others
           </Text>
 
           <Text
             numberOfLines={1}
             ellipsizeMode="tail"
             style={styles.innerContainerText}>
-            12 products
+            13 products
           </Text>
         </View>
 
