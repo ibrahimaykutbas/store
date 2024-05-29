@@ -16,6 +16,8 @@ const Input = ({
   inputStyles,
   placeholderTextColor,
   icon = false,
+  maxLength,
+  keyboardType
 }) => {
   return (
     <View
@@ -33,6 +35,8 @@ const Input = ({
           placeholderTextColor={placeholderTextColor}
           secureTextEntry={isSecure}
           autoCapitalize="none"
+          maxLength={maxLength}
+          keyboardType={keyboardType}
         />
       </View>
       {icon && value != '' ? (

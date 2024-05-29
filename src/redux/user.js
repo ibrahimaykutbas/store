@@ -17,6 +17,9 @@ const basket = basketStorage && JSON.parse(basketStorage);
 const addressesStorage = storage.getString('addresses');
 const addresses = addressesStorage && JSON.parse(addressesStorage);
 
+const paymentsStorage = storage.getString('payments');
+const payments = paymentsStorage && JSON.parse(paymentsStorage);
+
 const initialState = {
   username: username || '',
   token: token || '',
@@ -24,6 +27,7 @@ const initialState = {
   favoriteList: favoriteList || [],
   basket: basket || [],
   addresses: addresses || [],
+  payments: payments || [],
 };
 
 const user = createSlice({
@@ -121,6 +125,28 @@ const user = createSlice({
 
       return storage.set('addresses', JSON.stringify(state.addresses));
     },
+    /*  */
+    addPayment: (state, action) => {
+      const payments = action.payload;
+      const isExist = state.payments.find(item => item.id == payments.id);
+
+      if (isExist) {
+        state.payments = state.payments.map(item =>
+          item.id == payments.id ? payments : item,
+        );
+      } else {
+        state.payments.push(payments);
+      }
+
+      return storage.set('payments', JSON.stringify(state.payments));
+    },
+    removePayment: (state, action) => {
+      const id = action.payload;
+      const newPayments = state.payments.filter(item => item.id !== id);
+      state.payments = newPayments;
+
+      return storage.set('payments', JSON.stringify(state.payments));
+    },
   },
 });
 
@@ -133,6 +159,8 @@ export const {
   clearBasket,
   addAddress,
   removeAddress,
+  addPayment,
+  removePayment,
 } = user.actions;
 
 export default user.reducer;

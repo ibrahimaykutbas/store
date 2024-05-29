@@ -17,12 +17,23 @@ import Fonts from '../../theme/Fonts';
 import { useNavigation } from '@react-navigation/native';
 import routes from '../../navigation/routes';
 
+import { useSelector } from 'react-redux';
+
 const Payment = () => {
   const navigation = useNavigation();
+
+  const { payments } = useSelector(state => state.user);
 
   const goAddPayment = () => {
     navigation.navigate(routes.OTHER_NAVIGATOR, {
       screen: routes.ADD_PAYMENT,
+    });
+  };
+
+  const goToDetail = payment => {
+    navigation.navigate(routes.OTHER_NAVIGATOR, {
+      screen: routes.ADD_PAYMENT,
+      params: { payment },
     });
   };
   return (
@@ -39,41 +50,26 @@ const Payment = () => {
 
         <Text style={styles.title}>Cards</Text>
 
-        <TouchableOpacity style={styles.innerContainer}>
-          <Text
-            numberOfLines={1}
-            ellipsizeMode="tail"
-            style={styles.innerContainerText}>
-            **** 4187
-            <CardIcon width={getRW(25)} height={getRW(25)} />
-          </Text>
+        {payments?.map(payment => (
+          <View style={styles.innerContainer} key={payment.id}>
+            <Text
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              style={styles.innerContainerText}>
+              {payment.cardNumber}
+              <CardIcon width={getRW(25)} height={getRW(25)} />
+              {payment.ccv} {payment.exp} {payment.cardHolderName}
+            </Text>
 
-          <TouchableOpacity>
-            <Back
-              width={getRW(17)}
-              height={getRW(17)}
-              style={{ transform: [{ rotateY: '180deg' }] }}
-            />
-          </TouchableOpacity>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.innerContainer}>
-          <Text
-            numberOfLines={1}
-            ellipsizeMode="tail"
-            style={styles.innerContainerText}>
-            **** 5757
-            <CardIcon width={getRW(25)} height={getRW(25)} />
-          </Text>
-
-          <TouchableOpacity>
-            <Back
-              width={getRW(17)}
-              height={getRW(17)}
-              style={{ transform: [{ rotateY: '180deg' }] }}
-            />
-          </TouchableOpacity>
-        </TouchableOpacity>
+            <TouchableOpacity onPress={() => goToDetail(payment)}>
+              <Back
+                width={getRW(17)}
+                height={getRW(17)}
+                style={{ transform: [{ rotateY: '180deg' }] }}
+              />
+            </TouchableOpacity>
+          </View>
+        ))}
 
         <View style={{ marginTop: getRH(32) }}>
           <Text style={styles.title}>Paypal</Text>
