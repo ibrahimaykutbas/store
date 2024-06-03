@@ -8,6 +8,8 @@ import {
 import React, { useEffect, useState } from 'react';
 
 import Input from '../../components/Input';
+import Button from '../../components/Button';
+
 
 import { useNavigation } from '@react-navigation/native';
 import routes from '../../navigation/routes';
@@ -122,21 +124,20 @@ const AddAddress = ({ route }) => {
           />
         </View>
 
-        <TouchableOpacity
-          style={{
-            ...styles.moreButton,
-            top: editAddress ? getRH(620) : getRH(700),
-          }}
-          onPress={() => saveAddress()}>
-          <Text style={styles.moreButtonText}>Save</Text>
-        </TouchableOpacity>
+        <Button
+          onPress={() => saveAddress()}
+          title="Save"
+          containerStyles={styles.moreButton}
+          titleStyles={styles.moreButtonText}
+        />
 
         {editAddress && (
-          <TouchableOpacity
-            style={styles.moreButton}
-            onPress={onPressRemoveAddress}>
-            <Text style={styles.moreButtonText}>Delete</Text>
-          </TouchableOpacity>
+          <Button
+            onPress={() => onPressRemoveAddress()}
+            title="Save"
+            containerStyles={styles.moreButton}
+            titleStyles={styles.moreButtonText}
+          />
         )}
       </View>
     </SafeAreaView>

@@ -19,6 +19,8 @@ import routes from '../../navigation/routes';
 
 import { useSelector } from 'react-redux';
 
+import Button from '../../components/Button';
+
 const Payment = () => {
   const navigation = useNavigation();
   const { payments } = useSelector(state => state.user);
@@ -94,11 +96,14 @@ const Payment = () => {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity
-          style={styles.moreButton}
-          onPress={() => goAddPayment()}>
-          <Text style={styles.moreButtonText}>Add Payment Method</Text>
-        </TouchableOpacity>
+        <Button
+          onPress={() => goAddPayment()}
+          title="Add Payment Method"
+          containerStyles={styles.moreButton}
+          titleStyles={styles.moreButtonText}
+        />
+
+        
       </View>
     </SafeAreaView>
   );

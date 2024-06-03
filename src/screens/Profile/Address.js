@@ -18,6 +18,8 @@ import routes from '../../navigation/routes';
 
 import { useSelector } from 'react-redux';
 
+import Button from '../../components/Button';
+
 const Address = () => {
   const navigation = useNavigation();
   const { addresses } = useSelector(state => state.user);
@@ -61,11 +63,12 @@ const Address = () => {
           </View>
         ))}
 
-        <TouchableOpacity
-          style={styles.moreButton}
-          onPress={() => goAddAddress()}>
-          <Text style={styles.moreButtonText}>Add Address</Text>
-        </TouchableOpacity>
+        <Button
+          onPress={() => goAddAddress()}
+          title="Add Address"
+          containerStyles={styles.moreButton}
+          titleStyles={styles.moreButtonText}
+        />
       </View>
     </SafeAreaView>
   );
