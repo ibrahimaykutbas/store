@@ -12,11 +12,8 @@ import Colors from '../../theme/Colors';
 import { getRH, getRW } from '../../theme/Units';
 import Fonts from '../../theme/Fonts';
 
-/* import BasketIcon from '../../assets/svgs/checkOutIcon.svg'; */
 import OrderIcon from '../../assets/svgs/orders.svg';
 import Arrow from '../../assets/svgs/back.svg';
-
-/* import Button from '../../components/Button'; */
 
 import routes from '../../navigation/routes';
 import { useNavigation } from '@react-navigation/native';
@@ -27,12 +24,6 @@ const Orders = ({ order = true }) => {
   const navigation = useNavigation();
 
   const [selectedSection, setSelectedSection] = useState('Procressing');
-
-  /* const onPressGoCategories = () => {
-    navigation.navigate(routes.OTHER_NAVIGATOR, {
-      screen: routes.CATEGORIES,
-    });
-  }; */
 
   const onPressGoOrderDetail = orderText => {
     navigation.navigate(routes.OTHER_NAVIGATOR, {
@@ -102,16 +93,6 @@ const Orders = ({ order = true }) => {
       </View>
       {order ? (
         <>
-          
-          {/* <View style={styles.innerContainer}>
-            <BasketIcon width={getRW(170)} height={getRH(170)} />
-            <Text style={styles.innerContainerText}>No Order yet</Text>
-          </View>
-          <Button
-            title="Explore Categories"
-            onPress={() => onPressGoCategories()}
-            containerStyles={styles.button}
-          /> */}
           <View style={{ height: 300 }}>
             <ScrollView
               horizontal={true}
@@ -181,19 +162,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: Fonts.size(23),
   },
- /*  innerContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: getRH(204),
-  },
-  innerContainerText: {
-    fontSize: Fonts.size(34),
-    fontWeight: '400',
-    marginTop: getRH(24),
-  },
-  button: {
-    marginHorizontal: getRW(102),
-  }, */
   renderContainer: {
     flex: 1,
     backgroundColor: Colors.GREY,
