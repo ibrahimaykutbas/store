@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     top: getRH(700),
     right: getRW(0),
     width: getRW(342),
-    height: getRH(40),
+    height: getRH(60),
     backgroundColor: Colors.PURPLE,
     borderRadius: getRW(40),
     justifyContent: 'center',
