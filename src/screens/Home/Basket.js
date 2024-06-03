@@ -46,6 +46,10 @@ const Basket = () => {
   const SHIPPING_COST = 10;
   const TAX = 20;
 
+  const goCheckOut = () => {
+    navigation.navigate(routes.CHECKOUT);
+  };
+
   const Footer = () => {
     if (basket.length === 0) return null;
 
@@ -97,7 +101,7 @@ const Basket = () => {
           </View>
         </View>
 
-        <Button title="Checkout" onPress={() => console.log('pressed')} />
+        <Button title="Checkout" onPress={() => goCheckOut()} />
       </>
     );
   };
