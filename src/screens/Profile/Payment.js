@@ -21,7 +21,6 @@ import { useSelector } from 'react-redux';
 
 const Payment = () => {
   const navigation = useNavigation();
-
   const { payments } = useSelector(state => state.user);
 
   const goAddPayment = () => {
@@ -36,6 +35,7 @@ const Payment = () => {
       params: { payment },
     });
   };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
@@ -50,26 +50,28 @@ const Payment = () => {
 
         <Text style={styles.title}>Cards</Text>
 
-        {payments?.map(payment => (
-          <View style={styles.innerContainer} key={payment.id}>
-            <Text
-              numberOfLines={1}
-              ellipsizeMode="tail"
-              style={styles.innerContainerText}>
-              {payment.cardNumber}
-              <CardIcon width={getRW(25)} height={getRW(25)} />
-              {payment.ccv} {payment.exp} {payment.cardHolderName}
-            </Text>
+        {payments?.map(payment => {
+          const lastFourDigits = payment.cardNumber.slice(-4);
+          return (
+            <View style={styles.innerContainer} key={payment.id}>
+              <Text
+                numberOfLines={1}
+                ellipsizeMode="tail"
+                style={styles.innerContainerText}>
+                **** {lastFourDigits}
+                <CardIcon width={getRW(25)} height={getRW(25)} />
+              </Text>
 
-            <TouchableOpacity onPress={() => goToDetail(payment)}>
-              <Back
-                width={getRW(17)}
-                height={getRW(17)}
-                style={{ transform: [{ rotateY: '180deg' }] }}
-              />
-            </TouchableOpacity>
-          </View>
-        ))}
+              <TouchableOpacity onPress={() => goToDetail(payment)}>
+                <Back
+                  width={getRW(17)}
+                  height={getRW(17)}
+                  style={{ transform: [{ rotateY: '180deg' }] }}
+                />
+              </TouchableOpacity>
+            </View>
+          );
+        })}
 
         <View style={{ marginTop: getRH(32) }}>
           <Text style={styles.title}>Paypal</Text>

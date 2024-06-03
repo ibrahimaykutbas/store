@@ -15,7 +15,7 @@ import Colors from '../../theme/Colors';
 import BackIcon from '../../assets/svgs/back.svg';
 import CardIcon from '../../assets/svgs/masterCard.svg';
 
-import { useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -31,6 +31,8 @@ const CheckOut = () => {
   const payments = useSelector(state => state.user.payments);
 
   const [basketSubtotal, setBasketSubtotal] = useState(0);
+
+  const lastFourDigits = payments[0].cardNumber.slice(-4);
 
   useEffect(() => {
     const basketTotal = basket.reduce(
@@ -105,7 +107,7 @@ const CheckOut = () => {
                 numberOfLines={1}
                 ellipsizeMode="tail"
                 style={styles.innerContainerText}>
-                {item.item.cardNumber}
+                {lastFourDigits}
                 <CardIcon width={getRW(25)} height={getRW(25)} />
               </Text>
             ) : (
