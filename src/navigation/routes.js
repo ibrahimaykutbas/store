@@ -25,7 +25,8 @@ export const routes = {
   ADD_ADDRESS:'AddAddress',
   ADD_PAYMENT:'AddPayment',
   FAVORITES:'Favorites',
-  CHECKOUT:'CheckOut'
+  CHECKOUT:'CheckOut',
+  ORDER_PLACED:'OrderPlaced'
 };
 
 export default routes;

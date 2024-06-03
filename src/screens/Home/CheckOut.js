@@ -51,6 +51,12 @@ const CheckOut = () => {
     { type: 'payment', item: payments[0] || null },
   ];
 
+  const goOrderPlaced = () => {
+    navigation.navigate(routes.OTHER_NAVIGATOR, {
+      screen: routes.ORDER_PLACED,
+    });
+  };
+
   const RenderItem = ({ item }) => {
     if (item.type === 'address') {
       return (
@@ -69,7 +75,7 @@ const CheckOut = () => {
                 numberOfLines={1}
                 ellipsizeMode="tail"
                 style={styles.innerContainerText}>
-                {item.item.street} {item.item.city} {item.item.state}{' '}
+                {item.item.street}, {item.item.city}, {item.item.state},{' '}
                 {item.item.zipCode}
               </Text>
             ) : (
@@ -107,7 +113,7 @@ const CheckOut = () => {
                 numberOfLines={1}
                 ellipsizeMode="tail"
                 style={styles.innerContainerText}>
-                {lastFourDigits}
+                **** {lastFourDigits}
                 <CardIcon width={getRW(25)} height={getRW(25)} />
               </Text>
             ) : (
@@ -140,50 +146,30 @@ const CheckOut = () => {
         <View style={styles.summaryContainer}>
           <View style={styles.summaryLine}>
             <Text style={styles.summaryTitle}>Subtotal</Text>
-            <Text
-              style={{
-                ...styles.summaryTitle,
-                opacity: 1,
-              }}>
+            <Text style={styles.summaryTitle}>
               ${basketSubtotal.toFixed(2)}
             </Text>
           </View>
 
           <View style={styles.summaryLine}>
             <Text style={styles.summaryTitle}>Shipping Cost</Text>
-            <Text
-              style={{
-                ...styles.summaryTitle,
-                opacity: 1,
-              }}>
-              ${SHIPPING_COST.toFixed(2)}
-            </Text>
+            <Text style={styles.summaryTitle}>${SHIPPING_COST.toFixed(2)}</Text>
           </View>
 
           <View style={styles.summaryLine}>
             <Text style={styles.summaryTitle}>Tax</Text>
-            <Text
-              style={{
-                ...styles.summaryTitle,
-                opacity: 1,
-              }}>
-              ${TAX.toFixed(2)}
-            </Text>
+            <Text style={styles.summaryTitle}>${TAX.toFixed(2)}</Text>
           </View>
 
           <View style={styles.summaryLine}>
             <Text style={styles.summaryTitle}>Total</Text>
-            <Text
-              style={{
-                ...styles.summaryTitle,
-                opacity: 1,
-              }}>
+            <Text style={styles.summaryTitle}>
               ${(basketSubtotal + SHIPPING_COST + TAX).toFixed(2)}
             </Text>
           </View>
         </View>
 
-        <Button title="Checkout" onPress={() => console.log('pressed')} />
+        <Button title="Checkout" onPress={() => goOrderPlaced()} />
       </>
     );
   };
