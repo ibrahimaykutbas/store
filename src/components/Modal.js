@@ -30,6 +30,12 @@ const Modal = ({
 
   const data = type === 'size' ? sizes : colors;
 
+  const onSelectItem = item => {
+    type === 'size' ? setSelectedSize(item) : setSelectedColor(item);
+
+    onClose();
+  };
+
   return (
     <ReactNativeModal
       isVisible={isVisible}
@@ -48,57 +54,52 @@ const Modal = ({
 
         <View style={styles.content}>
           <ScrollView>
-            {data.map((item, index) => (
-              <TouchableOpacity
-                style={[
-                  styles.item,
-                  (selectedSize == item || selectedColor == item) &&
-                    styles.selectedItem,
-                ]}
-                key={index.toString()}
-                onPress={() =>
-                  type === 'size'
-                    ? setSelectedSize(item)
-                    : setSelectedColor(item)
-                }
-                activeOpacity={0.8}>
-                <Text
-                  style={[
-                    styles.itemText,
-                    (selectedSize == item || selectedColor == item) &&
-                      styles.selectedItemText,
-                  ]}>
-                  {item}
-                </Text>
-                <View style={styles.itemRight}>
-                  {type === 'color' && (
-                    <View
-                      style={[
-                        (selectedSize == item || selectedColor == item) &&
-                          styles.activeDot,
-                        {
-                          position: 'absolute',
-                          right: getRW(30),
-                        },
-                      ]}>
+            {data.map((item, index) => {
+              const isSelectedItem =
+                selectedSize == item || selectedColor == item;
+
+              return (
+                <TouchableOpacity
+                  style={[styles.item, isSelectedItem && styles.selectedItem]}
+                  key={index.toString()}
+                  onPress={() => onSelectItem(item)}
+                  activeOpacity={0.8}>
+                  <Text
+                    style={[
+                      styles.itemText,
+                      isSelectedItem && styles.selectedItemText,
+                    ]}>
+                    {item}
+                  </Text>
+                  <View style={styles.itemRight}>
+                    {type === 'color' && (
                       <View
                         style={[
-                          styles.dot,
-                          { backgroundColor: item.toLowerCase() },
-                        ]}
+                          isSelectedItem && styles.activeDot,
+                          {
+                            position: 'absolute',
+                            right: getRW(30),
+                          },
+                        ]}>
+                        <View
+                          style={[
+                            styles.dot,
+                            { backgroundColor: item.toLowerCase() },
+                          ]}
+                        />
+                      </View>
+                    )}
+                    {isSelectedItem && (
+                      <TickIcon
+                        width={getRW(20)}
+                        height={getRH(20)}
+                        style={{ marginLeft: getRW(5) }}
                       />
-                    </View>
-                  )}
-                  {(selectedSize == item || selectedColor == item) && (
-                    <TickIcon
-                      width={getRW(20)}
-                      height={getRH(20)}
-                      style={{ marginLeft: getRW(5) }}
-                    />
-                  )}
-                </View>
-              </TouchableOpacity>
-            ))}
+                    )}
+                  </View>
+                </TouchableOpacity>
+              );
+            })}
           </ScrollView>
         </View>
       </View>
