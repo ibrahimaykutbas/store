@@ -169,7 +169,11 @@ const CheckOut = () => {
           </View>
         </View>
 
-        <Button title="Checkout" onPress={() => goOrderPlaced()} />
+        <Button
+          title={`${basketSubtotal.toFixed(2)}$ Place Order`}
+          titleStyles={styles.titleStyles}
+          onPress={() => goOrderPlaced()}
+        />
       </>
     );
   };
