@@ -8,6 +8,8 @@ import {
 import React, { useState, useEffect } from 'react';
 
 import Input from '../../components/Input';
+import Button from '../../components/Button';
+
 
 import { useNavigation } from '@react-navigation/native';
 import routes from '../../navigation/routes';
@@ -131,18 +133,20 @@ const AddPayment = ({ route }) => {
           placeholderTextColor={Colors.SOFT_GREY}
         />
 
-        <TouchableOpacity
-          style={styles.moreButton}
-          onPress={() => savePayment()}>
-          <Text style={styles.moreButtonText}>Save</Text>
-        </TouchableOpacity>
+        <Button
+          onPress={() => savePayment()}
+          title="Save"
+          containerStyles={styles.moreButton}
+          titleStyles={styles.moreButtonText}
+        />
 
         {editPayment && (
-          <TouchableOpacity
-            style={styles.moreButton}
-            onPress={onPressRemovePayment}>
-            <Text style={styles.moreButtonText}>Delete</Text>
-          </TouchableOpacity>
+          <Button
+            onPress={() => onPressRemovePayment()}
+            title="Save"
+            containerStyles={styles.moreButton}
+            titleStyles={styles.moreButtonText}
+          />
         )}
       </View>
     </SafeAreaView>

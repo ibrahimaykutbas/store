@@ -24,7 +24,9 @@ export const routes = {
   WISHLIST:'Wishlist',
   ADD_ADDRESS:'AddAddress',
   ADD_PAYMENT:'AddPayment',
-  FAVORITES:'Favorites'
+  FAVORITES:'Favorites',
+  CHECKOUT:'CheckOut',
+  ORDER_PLACED:'OrderPlaced'
 };
 
 export default routes;

@@ -13,9 +13,11 @@ import Basket from '../screens/Home/Basket';
 import AddAddress from '../screens/Profile/AddAddress';
 import AddPayment from '../screens/Profile/AddPayment';
 import Favorites from '../screens/Profile/Favorites';
+import CheckOut from '../screens/Home/CheckOut';
 
 
 import routes from './routes';
+import OrderPlaced from '../screens/Orders/OrderPlaced';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +38,8 @@ const AuthNavigator = () => {
       <Stack.Screen name={routes.ADD_ADDRESS} component={AddAddress} />
       <Stack.Screen name={routes.ADD_PAYMENT} component={AddPayment} />
       <Stack.Screen name={routes.FAVORITES} component={Favorites} />
+      <Stack.Screen name={routes.CHECKOUT} component={CheckOut} />
+      <Stack.Screen name={routes.ORDER_PLACED} component={OrderPlaced} />
     </Stack.Navigator>
   );
 };

@@ -59,8 +59,8 @@ const Home = ({ navigation }) => {
           })
         }
       />
-      <SearchBar />
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+      <SearchBar />
         <CategoriesList data={getCategoriesApi.data} />
         <ProductList
           title="Top Selling"
