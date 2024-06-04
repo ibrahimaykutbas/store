@@ -19,6 +19,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import routes from '../../navigation/routes';
 import productsApi from '../../services/products';
+import SearchBar from '../../components/SearchBar';
 
 const Categories = ({ route }) => {
   const getCategoriesApi = useApi(productsApi.getCategories);
@@ -59,11 +60,12 @@ const Categories = ({ route }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity
+        <SearchBar onPressBack={true} />
+        {/* <TouchableOpacity
           style={styles.backButton}
           onPress={() => navigation.goBack()}>
           <BackIcon width={getRW(8)} height={getRH(22)} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <Text style={styles.title}>Shop by Categories</Text>
       </View>
