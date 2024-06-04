@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
   summaryContainer: {
-    marginTop: getRH(120),
+    marginTop: getRH(290),
     marginBottom: getRH(40),
   },
   summaryLine: {
