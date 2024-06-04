@@ -50,6 +50,7 @@ const CartItem = ({ item }) => {
             activeOpacity={0.8}>
             <PlusIcon width={getRW(14)} height={getRH(14)} />
           </TouchableOpacity>
+          <Text style={styles.quantity}>{item.quantity}</Text>
           <TouchableOpacity
             style={styles.smallButton}
             onPress={() => dispatch(removeFromBasket(item))}
@@ -110,6 +111,7 @@ const styles = StyleSheet.create({
     marginTop: getRH(10),
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginHorizontal: getRW(8),
   },
   smallButton: {
     width: getRW(24),
@@ -118,6 +120,12 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.PURPLE,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  quantity: {
+    fontSize: Fonts.size(16),
+    color: Colors.BLACK,
+    fontWeight: '400',
+    marginHorizontal: getRW(4),
   },
   price: {
     fontSize: Fonts.size(16),
