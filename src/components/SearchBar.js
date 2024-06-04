@@ -20,6 +20,7 @@ const SearchBar = ({ onPressBack }) => {
         <TouchableOpacity onPress={onPressBack} style={styles.backButton}>
           <BackIcon width={getRW(8)} height={getRH(22)} />
         </TouchableOpacity>
+        
       ) : null}
       <View>
         <Input
@@ -45,7 +46,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: getRH(24),
-    marginHorizontal: getRW(24),
   },
   backButton: {
     width: getRH(45),
