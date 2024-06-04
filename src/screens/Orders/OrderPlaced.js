@@ -9,11 +9,24 @@ import Fonts from '../../theme/Fonts';
 
 import Button from '../../components/Button';
 
+import { useNavigation } from '@react-navigation/native';
+import routes from '../../navigation/routes';
+
 const OrderPlaced = () => {
+  const navigation = useNavigation();
+
+  const goOders = () => {
+    navigation.navigate(routes.TAB_NAVIGATOR, {
+      screen: routes.ORDERS,
+    });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.ımageContainer}>
-        <Image height={256} width={318} />
+      <View style={styles.content}>
+        <View style={styles.ımageContainer}>
+          <Image height={256} width={318} />
+        </View>
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.headerText}>Order Placed Successfully</Text>
@@ -21,9 +34,13 @@ const OrderPlaced = () => {
         <Text style={styles.innerText}>
           You will recieve an email confirmation
         </Text>
+        <Button
+          containerStyles={styles.containerStyles}
+          titleStyles={styles.titleStyles}
+          title="See Order Details"
+          onPress={() => goOders()}
+        />
       </View>
-
-      <Button title="See Order Details" onPress={() => console.log('bb')} /* containerStyles={containerStyles} */ />
     </SafeAreaView>
   );
 };
@@ -32,6 +49,10 @@ export default OrderPlaced;
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: Colors.PURPLE,
+    flex: 0.5,
+  },
+  content: {
     backgroundColor: Colors.PURPLE,
   },
   ımageContainer: {
@@ -42,7 +63,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.WHITE,
     borderTopRightRadius: getRH(40),
     borderTopLeftRadius: getRH(40),
-    marginTop: getRH(68),
+    marginTop: getRH(30),
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -56,10 +77,16 @@ const styles = StyleSheet.create({
     color: Colors.SOFT_GREY,
     fontSize: Fonts.size(20),
     fontWeight: '600',
-    marginTop: getRH(25),
+    marginTop: getRH(40),
+    marginBottom: getRH(50),
   },
-  containerStyles:{
-    borderRadius:getRW(50)
+  containerStyles: {
+    width: getRW(340),
+    height: getRH(56),
   },
-  titleStyles:{},
+  titleStyles: {
+    color: Colors.WHITE,
+    fontSize: Fonts.size(16),
+    fontWeight: 'bold',
+  },
 });
