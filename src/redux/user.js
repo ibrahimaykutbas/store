@@ -79,7 +79,7 @@ const user = createSlice({
             : item,
         );
       } else {
-        state.basket.push({ ...product, quantity: 1 });
+        state.basket.push(product);
       }
 
       return storage.set('basket', JSON.stringify(state.basket));
