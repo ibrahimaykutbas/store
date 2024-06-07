@@ -61,8 +61,10 @@ const Payment = () => {
                 ellipsizeMode="tail"
                 style={styles.innerContainerText}>
                 **** {lastFourDigits}
-                <CardIcon width={getRW(25)} height={getRW(25)} />
               </Text>
+              <View style={{marginRight:getRW(180)}} >
+                <CardIcon width={getRW(25)} height={getRW(25)} />
+              </View>
 
               <TouchableOpacity onPress={() => goToDetail(payment)}>
                 <Back
@@ -102,8 +104,6 @@ const Payment = () => {
           containerStyles={styles.moreButton}
           titleStyles={styles.moreButtonText}
         />
-
-        
       </View>
     </SafeAreaView>
   );
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     color: Colors.BLACK,
     fontSize: Fonts.size(17),
     fontWeight: '400',
-    width: getRW(248),
+    width: getRW(70),
   },
   moreButton: {
     position: 'absolute',

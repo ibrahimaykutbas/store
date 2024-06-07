@@ -109,13 +109,17 @@ const CheckOut = () => {
               Payment Method
             </Text>
             {item.item ? (
-              <Text
-                numberOfLines={1}
-                ellipsizeMode="tail"
-                style={styles.innerContainerText}>
-                **** {lastFourDigits}
-                <CardIcon width={getRW(25)} height={getRW(25)} />
-              </Text>
+              <View style={{ flexDirection: 'row' }}>
+                <Text
+                  numberOfLines={1}
+                  ellipsizeMode="tail"
+                  style={styles.innerContainerTextPayment}>
+                  **** {lastFourDigits}
+                </Text>
+                <View>
+                  <CardIcon width={getRW(25)} height={getRW(25)} />
+                </View>
+              </View>
             ) : (
               <Text
                 numberOfLines={1}
@@ -250,6 +254,13 @@ const styles = StyleSheet.create({
     fontSize: Fonts.size(23),
     fontWeight: 'bold',
     width: getRW(250),
+    marginBottom: getRH(5),
+  },
+  innerContainerTextPayment: {
+    color: Colors.BLACK,
+    fontSize: Fonts.size(23),
+    fontWeight: 'bold',
+    width: getRW(100),
     marginBottom: getRH(5),
   },
   innerContainerHeaderText: {
