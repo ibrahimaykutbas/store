@@ -19,6 +19,7 @@ import routes from '../../navigation/routes';
 import { useSelector } from 'react-redux';
 
 import Button from '../../components/Button';
+import Empty from '../../components/Empty';
 
 const Address = () => {
   const navigation = useNavigation();
@@ -49,19 +50,26 @@ const Address = () => {
           <Text style={styles.headerText}>Address</Text>
         </View>
 
-        {addresses?.map(address => (
-          <View style={styles.innerContainer} key={address.id}>
-            <Text
-              numberOfLines={1}
-              ellipsizeMode="tail"
-              style={styles.innerContainerText}>
-              {address.street} {address.city} {address.state} {address.zipCode}
-            </Text>
-            <TouchableOpacity onPress={() => goToDetail(address)}>
-              <Text style={styles.innerContainerButtonText}>Edit</Text>
-            </TouchableOpacity>
-          </View>
-        ))}
+        {addresses?.length === 0 ? (
+          <Text style={styles.emptyText}>
+            You have no address saved. Please add one.
+          </Text>
+        ) : (
+          addresses?.map(address => (
+            <View style={styles.innerContainer} key={address.id}>
+              <Text
+                numberOfLines={1}
+                ellipsizeMode="tail"
+                style={styles.innerContainerText}>
+                {address.street} {address.city} {address.state}{' '}
+                {address.zipCode}
+              </Text>
+              <TouchableOpacity onPress={() => goToDetail(address)}>
+                <Text style={styles.innerContainerButtonText}>Edit</Text>
+              </TouchableOpacity>
+            </View>
+          ))
+        )}
 
         <Button
           onPress={() => goAddAddress()}
@@ -104,6 +112,14 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  emptyText: {
+    color: Colors.BLACK,
+    fontSize: Fonts.size(30),
+    fontWeight: '600',
+    textAlign: 'center',
+    marginTop: '50%',
+    marginHorizontal: getRW(20),
   },
   innerContainer: {
     width: getRW(342),
