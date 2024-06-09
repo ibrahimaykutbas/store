@@ -4,7 +4,6 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  FlatList,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 
@@ -18,7 +17,6 @@ import CardIcon from '../../assets/svgs/masterCard.svg';
 import { useSelector } from 'react-redux';
 
 import { useNavigation } from '@react-navigation/native';
-
 import routes from '../../navigation/routes';
 
 import Button from '../../components/Button';
@@ -27,12 +25,12 @@ const CheckOut = () => {
   const navigation = useNavigation();
 
   const basket = useSelector(state => state.user.basket);
-  const addresses = useSelector(state => state.user.addresses);
-  const payments = useSelector(state => state.user.payments);
+  const addresses = useSelector(state => state.user.addresses)[0];
+  const payments = useSelector(state => state.user.payments)[0];
 
   const [basketSubtotal, setBasketSubtotal] = useState(0);
 
-  const lastFourDigits = payments[0].cardNumber.slice(-4);
+  const lastFourDigits = payments && payments.cardNumber.slice(-4);
 
   useEffect(() => {
     const basketTotal = basket.reduce(
@@ -46,100 +44,10 @@ const CheckOut = () => {
   const SHIPPING_COST = 10;
   const TAX = 20;
 
-  const data = [
-    { type: 'address', item: addresses[0] || null },
-    { type: 'payment', item: payments[0] || null },
-  ];
-
   const goOrderPlaced = () => {
     navigation.navigate(routes.OTHER_NAVIGATOR, {
       screen: routes.ORDER_PLACED,
     });
-  };
-
-  const RenderItem = ({ item }) => {
-    if (item.type === 'address') {
-      return (
-        <TouchableOpacity
-          style={styles.innerContainer}
-          onPress={() => console.log('pressed address')}>
-          <View>
-            <Text
-              numberOfLines={1}
-              ellipsizeMode="tail"
-              style={styles.innerContainerHeaderText}>
-              Shipping Address
-            </Text>
-            {item.item ? (
-              <Text
-                numberOfLines={1}
-                ellipsizeMode="tail"
-                style={styles.innerContainerText}>
-                {item.item.street}, {item.item.city}, {item.item.state},{' '}
-                {item.item.zipCode}
-              </Text>
-            ) : (
-              <Text
-                numberOfLines={1}
-                ellipsizeMode="tail"
-                style={styles.innerContainerText}>
-                Add Shipping Address
-              </Text>
-            )}
-          </View>
-          <TouchableOpacity>
-            <BackIcon
-              width={getRW(17)}
-              height={getRW(17)}
-              style={{ transform: [{ rotateY: '180deg' }] }}
-            />
-          </TouchableOpacity>
-        </TouchableOpacity>
-      );
-    } else if (item.type === 'payment') {
-      return (
-        <TouchableOpacity
-          style={styles.innerContainer}
-          onPress={() => console.log('pressed payment')}>
-          <View>
-            <Text
-              numberOfLines={1}
-              ellipsizeMode="tail"
-              style={styles.innerContainerHeaderText}>
-              Payment Method
-            </Text>
-            {item.item ? (
-              <View style={{ flexDirection: 'row' }}>
-                <Text
-                  numberOfLines={1}
-                  ellipsizeMode="tail"
-                  style={styles.innerContainerTextPayment}>
-                  **** {lastFourDigits}
-                </Text>
-                <View>
-                  <CardIcon width={getRW(25)} height={getRW(25)} />
-                </View>
-              </View>
-            ) : (
-              <Text
-                numberOfLines={1}
-                ellipsizeMode="tail"
-                style={styles.innerContainerText}>
-                Add Payment Method
-              </Text>
-            )}
-          </View>
-          <TouchableOpacity>
-            <BackIcon
-              width={getRW(17)}
-              height={getRW(17)}
-              style={{ transform: [{ rotateY: '180deg' }] }}
-            />
-          </TouchableOpacity>
-        </TouchableOpacity>
-      );
-    }
-    return null;
   };
 
   const Footer = () => {
@@ -182,6 +90,36 @@ const CheckOut = () => {
     );
   };
 
+  const RenderCard = ({ title, emptyTitle, onPress, children }) => {
+    return (
+      <TouchableOpacity style={styles.innerContainer} onPress={onPress}>
+        <View>
+          <Text
+            numberOfLines={1}
+            ellipsizeMode="tail"
+            style={styles.innerContainerHeaderText}>
+            {title}
+          </Text>
+          {children ?? (
+            <Text
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              style={styles.innerContainerText}>
+              {emptyTitle}
+            </Text>
+          )}
+        </View>
+        <TouchableOpacity>
+          <BackIcon
+            width={getRW(17)}
+            height={getRW(17)}
+            style={{ transform: [{ rotateY: '180deg' }] }}
+          />
+        </TouchableOpacity>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
@@ -194,15 +132,49 @@ const CheckOut = () => {
           <Text style={styles.headerTitle}>Cart</Text>
         </View>
 
-        <FlatList
-          data={data}
-          renderItem={({ item }) => <RenderItem item={item} />}
-          ListFooterComponent={() => <Footer />}
-          keyExtractor={(item, index) => index.toString()}
-          ListFooterComponentStyle={{ marginBottom: getRH(200) }}
-          showsVerticalScrollIndicator={false}
-          alwaysBounceVertical={false}
-        />
+        <RenderCard
+          title="Shipping Address"
+          emptyTitle="Add Shipping Address"
+          onPress={() =>
+            navigation.navigate(routes.OTHER_NAVIGATOR, {
+              screen: addresses ? routes.ADDRESS : routes.ADD_ADDRESS,
+            })
+          }>
+          {addresses ? (
+            <Text
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              style={styles.innerContainerText}>
+              {addresses.street}, {addresses.city}, {addresses.state},{' '}
+              {addresses.zipCode}
+            </Text>
+          ) : null}
+        </RenderCard>
+
+        <RenderCard
+          title="Payment Method"
+          emptyTitle="Add Payment Method"
+          onPress={() =>
+            navigation.navigate(routes.OTHER_NAVIGATOR, {
+              screen: payments ? routes.PAYMENT : routes.ADD_PAYMENT,
+            })
+          }>
+          {payments ? (
+            <View style={{ flexDirection: 'row' }}>
+              <Text
+                numberOfLines={1}
+                ellipsizeMode="tail"
+                style={styles.innerContainerTextPayment}>
+                **** {lastFourDigits}
+              </Text>
+              <View>
+                <CardIcon width={getRW(25)} height={getRW(25)} />
+              </View>
+            </View>
+          ) : null}
+        </RenderCard>
+
+        <Footer />
       </View>
     </SafeAreaView>
   );
