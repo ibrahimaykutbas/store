@@ -82,7 +82,9 @@ const CheckOut = () => {
         </View>
 
         <Button
-          title={`${basketSubtotal.toFixed(2)}$ Place Order`}
+          title={`${(basketSubtotal + SHIPPING_COST + TAX).toFixed(
+            2,
+          )}$ Place Order`}
           titleStyles={styles.titleStyles}
           onPress={() => goOrderPlaced()}
         />
